@@ -5,6 +5,7 @@ import {
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
+  IndentFeature,
 } from '@payloadcms/richtext-lexical'
 
 import { linkGroup } from '@/fields/linkGroup'
@@ -42,12 +43,15 @@ export const hero: Field = {
       name: 'richText',
       type: 'richText',
       editor: lexicalEditor({
-        features: ({ rootFeatures }) => {
+        features: ({ defaultFeatures }) => {
           return [
-            ...rootFeatures,
+            // ...rootFeatures,
+            ...defaultFeatures,
+            // ...rootFeatures,
             HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
             FixedToolbarFeature(),
             InlineToolbarFeature(),
+            // IndentFeature(),
           ]
         },
       }),

@@ -5,6 +5,10 @@ import {
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
+  InlineCodeFeature,
+  ParagraphFeature,
+  AlignFeature,
+  IndentFeature,
 } from '@payloadcms/richtext-lexical'
 
 import { link } from '@/fields/link'
