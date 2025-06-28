@@ -2,6 +2,8 @@ import type { GlobalConfig } from 'payload'
 
 import { link } from '@/fields/link'
 import { revalidateFooter } from './hooks/revalidateFooter'
+import { CallToAction } from '@/blocks/CallToAction/config'
+import { Content } from '@/blocks/Content/config'
 
 export const Footer: GlobalConfig = {
   slug: 'footer',
@@ -10,19 +12,12 @@ export const Footer: GlobalConfig = {
   },
   fields: [
     {
-      name: 'navItems',
-      type: 'array',
-      fields: [
-        link({
-          appearances: false,
-        }),
-      ],
-      maxRows: 6,
+      name: 'layout',
+      type: 'blocks',
+      blocks: [Content, CallToAction],
+      required: true,
       admin: {
-        initCollapsed: true,
-        components: {
-          RowLabel: '@/Footer/RowLabel#RowLabel',
-        },
+        initCollapsed: false,
       },
     },
   ],
