@@ -2,9 +2,9 @@ import type { Field, GroupField } from 'payload'
 
 import { deepMerge } from 'payload'
 
-export type ButtonAppearances = 'default' | 'orange'
+export type LinkButtonAppearances = 'default' | 'orange'
 
-export const appearanceOptions: Record<ButtonAppearances, { label: string; value: string }> = {
+export const appearanceOptions: Record<LinkButtonAppearances, { label: string; value: string }> = {
   default: {
     label: 'Default',
     value: 'default',
@@ -15,15 +15,19 @@ export const appearanceOptions: Record<ButtonAppearances, { label: string; value
   },
 }
 
-type ButtonType = (options?: {
-  appearances?: ButtonAppearances[] | false
+type LinkButtonType = (options?: {
+  appearances?: LinkButtonAppearances[] | false
   disableLabel?: boolean
   overrides?: Partial<GroupField>
 }) => Field
 
-export const button: ButtonType = ({ appearances, disableLabel = false, overrides = {} } = {}) => {
-  const buttonResult: GroupField = {
-    name: 'button',
+export const button: LinkButtonType = ({
+  appearances,
+  disableLabel = false,
+  overrides = {},
+} = {}) => {
+  const linkButtonResult: GroupField = {
+    name: 'linkButton',
     type: 'group',
     admin: {
       hideGutter: true,
@@ -67,7 +71,7 @@ export const button: ButtonType = ({ appearances, disableLabel = false, override
     ],
   }
 
-  const buttonTypes: Field[] = [
+  const linkButtonTypes: Field[] = [
     {
       name: 'reference',
       type: 'relationship',
@@ -90,18 +94,18 @@ export const button: ButtonType = ({ appearances, disableLabel = false, override
   ]
 
   if (!disableLabel) {
-    buttonTypes.map((buttonType) => ({
-      ...buttonType,
+    linkButtonTypes.map((linkButtonType) => ({
+      ...linkButtonType,
       admin: {
-        ...buttonType.admin,
+        ...linkButtonType.admin,
         width: '50%',
       },
     }))
 
-    buttonResult.fields.push({
+    linkButtonResult.fields.push({
       type: 'row',
       fields: [
-        ...buttonTypes,
+        ...linkButtonTypes,
         {
           name: 'label',
           type: 'text',
@@ -114,7 +118,7 @@ export const button: ButtonType = ({ appearances, disableLabel = false, override
       ],
     })
   } else {
-    buttonResult.fields = [...buttonResult.fields, ...buttonTypes]
+    linkButtonResult.fields = [...linkButtonResult.fields, ...linkButtonTypes]
   }
 
   if (appearances !== false) {
@@ -124,7 +128,7 @@ export const button: ButtonType = ({ appearances, disableLabel = false, override
       appearanceOptionsToUse = appearances.map((appearance) => appearanceOptions[appearance])
     }
 
-    buttonResult.fields.push({
+    linkButtonResult.fields.push({
       name: 'appearance',
       type: 'select',
       admin: {
@@ -135,5 +139,5 @@ export const button: ButtonType = ({ appearances, disableLabel = false, override
     })
   }
 
-  return deepMerge(buttonResult, overrides)
+  return deepMerge(linkButtonResult, overrides)
 }
