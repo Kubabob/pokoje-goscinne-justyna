@@ -7,6 +7,7 @@ import type { Footer as FooterType } from '@/payload-types'
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import { CMSLink } from '@/components/Link'
 import { Logo } from '@/components/Logo/Logo'
+import RichText from '@/components/RichText'
 
 export async function Footer() {
   // const footerData: Footer = await getCachedGlobal('footer', 1)()
@@ -15,6 +16,7 @@ export async function Footer() {
   // const navItems = footerData?.navItems || []
   // const layout = footerData?.layout || []
   const navItems = footerData?.navigation?.navItems || []
+  const infoContent = footerData?.info?.richText
 
   return (
     <footer className="mt-auto border-t border-border bg-black dark:bg-card text-white">
@@ -22,6 +24,10 @@ export async function Footer() {
         <Link className="flex items-center" href="/">
           <Logo />
         </Link>
+
+        <div className="flex">
+          {infoContent && <RichText className="mx-auto" data={infoContent} enableGutter={false} />}
+        </div>
 
         <div className="flex flex-col-reverse items-start md:flex-row gap-4 md:items-center">
           {/* <ThemeSelector /> */}
