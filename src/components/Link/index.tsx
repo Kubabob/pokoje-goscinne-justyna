@@ -1,12 +1,14 @@
 import { Button, type ButtonProps } from '@/components/ui/button'
 import { cn } from '@/utilities/ui'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 import type { Page, Post } from '@/payload-types'
+import type { Media } from '@/payload-types'
 
 type CMSLinkType = {
-  appearance?: 'inline' | ButtonProps['variant']
+  appearance?: 'inline' | 'image' | ButtonProps['variant']
   children?: React.ReactNode
   className?: string
   label?: string | null
@@ -18,6 +20,7 @@ type CMSLinkType = {
   size?: ButtonProps['size'] | null
   type?: 'custom' | 'reference' | null
   url?: string | null
+  image?: Media | string | null
 }
 
 export const CMSLink: React.FC<CMSLinkType> = (props) => {
@@ -31,6 +34,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     reference,
     size: sizeFromProps,
     url,
+    image,
   } = props
 
   const href =
@@ -51,6 +55,23 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
       <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
         {label && label}
         {children && children}
+      </Link>
+    )
+  }
+
+  /* Handle image buttons */
+  if (appearance === 'image' && image && typeof image === 'object') {
+    return (
+      <Link href={href || url || ''} {...newTabProps} className={cn('block', className)}>
+        {image.url && (
+          <Image
+            src={image.url}
+            alt={image.alt || label || 'Button image'}
+            width={image.width || 300}
+            height={image.height || 200}
+            className="w-full h-auto"
+          />
+        )}
       </Link>
     )
   }

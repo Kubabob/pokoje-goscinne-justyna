@@ -2,8 +2,7 @@ import type { Field, GroupField } from 'payload'
 
 import deepMerge from '@/utilities/deepMerge'
 
-export type LinkAppearances = 'default' | 'outline'
-// | 'image'
+export type LinkAppearances = 'default' | 'outline' | 'image'
 
 export const appearanceOptions: Record<LinkAppearances, { label: string; value: string }> = {
   default: {
@@ -14,10 +13,10 @@ export const appearanceOptions: Record<LinkAppearances, { label: string; value: 
     label: 'Outline',
     value: 'outline',
   },
-  // image: {
-  //   label: 'Image',
-  //   value: 'image',
-  // },
+  image: {
+    label: 'Image',
+    value: 'image',
+  },
 }
 
 type LinkType = (options?: {
@@ -126,7 +125,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
     let appearanceOptionsToUse = [
       appearanceOptions.default,
       appearanceOptions.outline,
-      // appearanceOptions.image,
+      appearanceOptions.image,
     ]
 
     if (appearances) {
@@ -143,17 +142,17 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
       options: appearanceOptionsToUse,
     })
 
-    // linkResult.fields.push({
-    //   name: 'media',
-    //   type: 'upload',
-    //   relationTo: 'media',
-    //   required: true,
-    //   admin: {
-    //     condition: (_, siblingData) => {
-    //       return siblingData?.appearance.value === 'image'
-    //     },
-    //   },
-    // })
+    // Add image upload field when image appearance is selected
+    linkResult.fields.push({
+      name: 'image',
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        condition: (_, siblingData) => siblingData?.appearance === 'image',
+        description: 'Select an image to use as a button.',
+      },
+      required: true,
+    })
   }
 
   return deepMerge(linkResult, overrides)
