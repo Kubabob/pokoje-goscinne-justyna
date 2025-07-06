@@ -21,7 +21,7 @@ type LinkButtonType = (options?: {
   overrides?: Partial<GroupField>
 }) => Field
 
-export const button: LinkButtonType = ({
+export const linkButton: LinkButtonType = ({
   appearances,
   disableLabel = false,
   overrides = {},

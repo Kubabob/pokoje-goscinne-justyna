@@ -25,6 +25,7 @@ const buttonVariants = cva(
         link: 'text-primary items-start justify-start underline-offset-4 hover:underline',
         outline: 'border border-border bg-background hover:bg-card hover:text-accent-foreground',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        orange: 'bg-orange-400 text-secondary-foreground hover:bg-secondary/80',
       },
     },
   },
@@ -35,6 +36,7 @@ export interface ButtonProps
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
   ref?: React.Ref<HTMLButtonElement>
+  img?: boolean
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -43,9 +45,17 @@ const Button: React.FC<ButtonProps> = ({
   size,
   variant,
   ref,
+  img,
   ...props
 }) => {
   const Comp = asChild ? Slot : 'button'
+  if (img) {
+    return (
+      <Comp className={cn(buttonVariants({ className, size, variant }))} ref={ref} {...props}>
+        {props.children}
+      </Comp>
+    )
+  }
   return <Comp className={cn(buttonVariants({ className, size, variant }))} ref={ref} {...props} />
 }
 
