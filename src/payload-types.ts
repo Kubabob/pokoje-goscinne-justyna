@@ -803,8 +803,8 @@ export interface TextMediaBlock {
 export interface TestimonialsBlock {
   testimonials?:
     | {
-        author?: string | null;
-        testimonial?: {
+        author: string;
+        testimonial: {
           root: {
             type: string;
             children: {
@@ -818,7 +818,7 @@ export interface TestimonialsBlock {
             version: number;
           };
           [k: string]: unknown;
-        } | null;
+        };
         id?: string | null;
       }[]
     | null;

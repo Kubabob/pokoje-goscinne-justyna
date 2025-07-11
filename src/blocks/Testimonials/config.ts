@@ -11,10 +11,12 @@ export const Testimonials: Block = {
         {
           name: 'author',
           type: 'text',
+          required: true,
         },
         {
           name: 'testimonial',
           type: 'richText',
+          required: true,
         },
       ],
     },
