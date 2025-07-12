@@ -9,6 +9,7 @@ import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { TextMediaBlock } from '@/blocks/TextMediaBlock/config'
 import { Testimonials } from '@/blocks/Testimonials/config'
+import { ExpandableBlock } from '@/blocks/ExpandableBlock/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -85,6 +86,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 FormBlock,
                 TextMediaBlock,
                 Testimonials,
+                ExpandableBlock,
               ],
               required: true,
               admin: {

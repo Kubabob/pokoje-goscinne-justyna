@@ -30,7 +30,7 @@ export const MediaBlock: Block = {
     },
     {
       name: 'customCaption',
-      type: 'richText',
+      type: 'text',
       admin: {
         condition: (_data, siblingData) => {
           return Boolean(siblingData?.enableCustomCaption)

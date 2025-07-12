@@ -205,6 +205,7 @@ export interface Page {
     | FormBlock
     | TextMediaBlock
     | TestimonialsBlock
+    | ExpandableBlock
   )[];
   meta?: {
     title?: string | null;
@@ -513,21 +514,7 @@ export interface MediaBlock {
   media: number | Media;
   enableCustomCaption?: boolean | null;
   customCaptionType?: ('below' | 'onTop') | null;
-  customCaption?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  customCaption?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaBlock';
@@ -842,6 +829,56 @@ export interface TestimonialsBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'testimonials';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ExpandableBlock".
+ */
+export interface ExpandableBlock {
+  enableMedia?: boolean | null;
+  mediaItems?:
+    | {
+        media: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  title: string;
+  enableButton?: boolean | null;
+  buttonText?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  inside?: {
+    content?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'expandableBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1168,6 +1205,7 @@ export interface PagesSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         textMediaBlock?: T | TextMediaBlockSelect<T>;
         testimonials?: T | TestimonialsBlockSelect<T>;
+        expandableBlock?: T | ExpandableBlockSelect<T>;
       };
   meta?:
     | T
@@ -1306,6 +1344,29 @@ export interface TestimonialsBlockSelect<T extends boolean = true> {
         author?: T;
         testimonial?: T;
         id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ExpandableBlock_select".
+ */
+export interface ExpandableBlockSelect<T extends boolean = true> {
+  enableMedia?: T;
+  mediaItems?:
+    | T
+    | {
+        media?: T;
+        id?: T;
+      };
+  title?: T;
+  enableButton?: T;
+  buttonText?: T;
+  inside?:
+    | T
+    | {
+        content?: T;
       };
   id?: T;
   blockName?: T;
