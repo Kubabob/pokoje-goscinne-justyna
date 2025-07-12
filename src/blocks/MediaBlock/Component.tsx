@@ -27,6 +27,9 @@ export const MediaBlock: React.FC<Props> = (props) => {
     media,
     staticImage,
     disableInnerContainer,
+    enableCustomCaption,
+    customCaptionType,
+    customCaption,
   } = props
 
   let caption
@@ -43,13 +46,35 @@ export const MediaBlock: React.FC<Props> = (props) => {
       )}
     >
       {(media || staticImage) && (
-        <Media
-          imgClassName={cn('border border-border rounded-[0.8rem]', imgClassName)}
-          resource={media}
-          src={staticImage}
-        />
+        <>
+          <div className="relative w-fit">
+            <Media
+              imgClassName={cn('border border-border rounded-[0.8rem]', imgClassName)}
+              resource={media}
+              src={staticImage}
+            />
+            {customCaption && customCaptionType === 'onTop' && (
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-white p-2 w-1/2 text-center">
+                <RichText data={customCaption} enableGutter={false} />
+              </div>
+            )}
+          </div>
+        </>
       )}
-      {caption && (
+      {customCaption && customCaptionType !== 'onTop' && (
+        <div
+          className={cn(
+            'mt-6',
+            {
+              container: !disableInnerContainer,
+            },
+            captionClassName,
+          )}
+        >
+          <RichText data={customCaption} enableGutter={false} />
+        </div>
+      )}
+      {!enableCustomCaption && caption && (
         <div
           className={cn(
             'mt-6',

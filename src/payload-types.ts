@@ -511,6 +511,23 @@ export interface ContentBlock {
  */
 export interface MediaBlock {
   media: number | Media;
+  enableCustomCaption?: boolean | null;
+  customCaptionType?: ('below' | 'onTop') | null;
+  customCaption?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaBlock';
@@ -1224,6 +1241,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
  */
 export interface MediaBlockSelect<T extends boolean = true> {
   media?: T;
+  enableCustomCaption?: T;
+  customCaptionType?: T;
+  customCaption?: T;
   id?: T;
   blockName?: T;
 }
