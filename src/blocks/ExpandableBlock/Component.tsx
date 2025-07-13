@@ -99,7 +99,7 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
                   index === currentIndex ? 'opacity-100' : 'opacity-0 absolute inset-0'
                 }`}
               >
-                <Media imgClassName={cn('w-full h-auto', imgClassName)} resource={media} />
+                <Media imgClassName={cn('w-100 h-auto', imgClassName)} resource={media} />
               </div>
             ))}
           </div>
