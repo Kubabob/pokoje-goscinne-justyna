@@ -206,6 +206,7 @@ export interface Page {
     | TextMediaBlock
     | TestimonialsBlock
     | ExpandableBlock
+    | MapBlock
   )[];
   meta?: {
     title?: string | null;
@@ -882,6 +883,23 @@ export interface ExpandableBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MapBlock".
+ */
+export interface MapBlock {
+  mapLinkText: string;
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  location: [number, number];
+  width?: number | null;
+  height?: number | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'mapBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "opinions".
  */
 export interface Opinion {
@@ -1206,6 +1224,7 @@ export interface PagesSelect<T extends boolean = true> {
         textMediaBlock?: T | TextMediaBlockSelect<T>;
         testimonials?: T | TestimonialsBlockSelect<T>;
         expandableBlock?: T | ExpandableBlockSelect<T>;
+        mapBlock?: T | MapBlockSelect<T>;
       };
   meta?:
     | T
@@ -1368,6 +1387,18 @@ export interface ExpandableBlockSelect<T extends boolean = true> {
     | {
         content?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MapBlock_select".
+ */
+export interface MapBlockSelect<T extends boolean = true> {
+  mapLinkText?: T;
+  location?: T;
+  width?: T;
+  height?: T;
   id?: T;
   blockName?: T;
 }
