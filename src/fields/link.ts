@@ -153,6 +153,17 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
       },
       required: true,
     })
+
+    // Add additional image before text
+    linkResult.fields.push({
+      name: 'additionalImage',
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        condition: (_, siblingData) => siblingData?.appearance !== 'image',
+        description: 'Select an image to use with a button.',
+      },
+    })
   }
 
   return deepMerge(linkResult, overrides)

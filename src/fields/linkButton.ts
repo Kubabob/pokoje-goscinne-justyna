@@ -138,6 +138,11 @@ export const linkButton: LinkButtonType = ({
       options: appearanceOptionsToUse,
     })
   }
+  linkButtonResult.fields.push({
+    name: 'buttonImage',
+    type: 'upload',
+    relationTo: 'media',
+  })
 
   return deepMerge(linkButtonResult, overrides)
 }

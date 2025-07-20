@@ -191,6 +191,10 @@ export interface Page {
              * Select an image to use as a button.
              */
             image?: (number | null) | Media;
+            /**
+             * Select an image to use with a button.
+             */
+            additionalImage?: (number | null) | Media;
           };
           id?: string | null;
         }[]
@@ -445,6 +449,10 @@ export interface CallToActionBlock {
            * Select an image to use as a button.
            */
           image?: (number | null) | Media;
+          /**
+           * Select an image to use with a button.
+           */
+          additionalImage?: (number | null) | Media;
         };
         id?: string | null;
       }[]
@@ -499,6 +507,10 @@ export interface ContentBlock {
            * Select an image to use as a button.
            */
           image?: (number | null) | Media;
+          /**
+           * Select an image to use with a button.
+           */
+          additionalImage?: (number | null) | Media;
         };
         id?: string | null;
       }[]
@@ -796,6 +808,7 @@ export interface TextMediaBlock {
      * Choose how the button should be rendered
      */
     appearance?: ('default' | 'orange') | null;
+    buttonImage?: (number | null) | Media;
   };
   id?: string | null;
   blockName?: string | null;
@@ -1208,6 +1221,7 @@ export interface PagesSelect<T extends boolean = true> {
                     label?: T;
                     appearance?: T;
                     image?: T;
+                    additionalImage?: T;
                   };
               id?: T;
             };
@@ -1259,6 +1273,7 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
               label?: T;
               appearance?: T;
               image?: T;
+              additionalImage?: T;
             };
         id?: T;
       };
@@ -1286,6 +1301,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
               label?: T;
               appearance?: T;
               image?: T;
+              additionalImage?: T;
             };
         id?: T;
       };
@@ -1348,6 +1364,7 @@ export interface TextMediaBlockSelect<T extends boolean = true> {
         url?: T;
         label?: T;
         appearance?: T;
+        buttonImage?: T;
       };
   id?: T;
   blockName?: T;

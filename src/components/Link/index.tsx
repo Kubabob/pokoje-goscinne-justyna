@@ -21,6 +21,7 @@ type CMSLinkType = {
   type?: 'custom' | 'reference' | null
   url?: string | null
   image?: Media | string | null
+  additionalImage?: Media | string | null
 }
 
 export const CMSLink: React.FC<CMSLinkType> = (props) => {
@@ -35,6 +36,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     size: sizeFromProps,
     url,
     image,
+    additionalImage,
   } = props
 
   const href =
@@ -74,14 +76,32 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
         )}
       </Link>
     )
+  } else if (additionalImage && typeof additionalImage === 'object') {
+    return (
+      <Button asChild className={className} size={size} variant={appearance}>
+        <Link className={cn(className, 'gap-1')} href={href || url || ''} {...newTabProps}>
+          {additionalImage.url && (
+            <Image
+              src={additionalImage.url}
+              alt={additionalImage.alt || label || 'Button image'}
+              width={20}
+              height={15}
+              className="w-full h-auto"
+            />
+          )}
+          {label && label}
+          {children && children}
+        </Link>
+      </Button>
+    )
+  } else {
+    return (
+      <Button asChild className={className} size={size} variant={appearance}>
+        <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
+          {label && label}
+          {children && children}
+        </Link>
+      </Button>
+    )
   }
-
-  return (
-    <Button asChild className={className} size={size} variant={appearance}>
-      <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
-        {label && label}
-        {children && children}
-      </Link>
-    </Button>
-  )
 }
