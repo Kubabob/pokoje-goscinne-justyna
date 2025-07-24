@@ -35,10 +35,10 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
           )}
         </div>
       </div>
-      <div className="container mb-20 mt-16 z-10 relative flex items-center pl-4">
+      <div className="container z-10 relative flex items-center ">
         <div className="w-screen">
           {Array.isArray(links) && links.length > 0 && (
-            <ul className="flex justify-center gap-4 flex-col">
+            <ul className="flex justify-center gap-16 flex-col">
               {links.map(({ link }, i) => {
                 return (
                   <li key={i} className="self-center">
