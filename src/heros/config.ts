@@ -8,6 +8,14 @@ import {
   IndentFeature,
 } from '@payloadcms/richtext-lexical'
 
+import {
+  TextColorFeature,
+  TextSizeFeature,
+  TextLetterSpacingFeature,
+  TextLineHeightFeature,
+  TextFontFamilyFeature,
+} from 'payload-lexical-typography'
+
 import { linkGroup } from '@/fields/linkGroup'
 
 export const hero: Field = {
@@ -47,11 +55,16 @@ export const hero: Field = {
           return [
             // ...rootFeatures,
             ...defaultFeatures,
-            // ...rootFeatures,
-            HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+            // HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
             FixedToolbarFeature(),
             InlineToolbarFeature(),
-            // IndentFeature(),
+            TextColorFeature({
+              colors: ['#FFFFFF', '#000000', '#FF0000', '#00FF00', '#0000FF'],
+            }),
+            TextSizeFeature(),
+            TextLetterSpacingFeature(),
+            TextLineHeightFeature(),
+            TextFontFamilyFeature(),
           ]
         },
       }),
@@ -65,11 +78,11 @@ export const hero: Field = {
     {
       name: 'media',
       type: 'upload',
-      admin: {
-        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact'].includes(type),
-      },
+      // admin: {
+      //   condition: (_, { type } = {}) => ['highImpact', 'mediumImpact'].includes(type),
+      // },
       relationTo: 'media',
-      required: true,
+      // required: true,
     },
   ],
   label: false,

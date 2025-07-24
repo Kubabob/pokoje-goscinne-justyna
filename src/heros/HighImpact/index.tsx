@@ -21,11 +21,11 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
 
   return (
     <div
-      className="relative -mt-[10.4rem] flex items-center justify-center text-white w-screen h-screen"
+      className="relative flex items-center justify-center text-white w-screen h-screen flex-col pt-4 md:pt-8"
       data-theme="dark"
     >
-      <div className="container mb-8 mt-26 z-10 relative flex items-center pl-4">
-        <div className="max-w-[36.5rem]">
+      <div className="container mb-4 md:mb-8 mt-12 md:mt-24 z-10 relative flex items-center pl-2 md:pl-4">
+        <div>
           {richText && (
             <RichText
               className={cn('mb-6', robotoSerif.className, 'text-white')}
@@ -33,11 +33,15 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
               enableGutter={false}
             />
           )}
+        </div>
+      </div>
+      <div className="container mb-20 mt-16 z-10 relative flex items-center pl-4">
+        <div className="w-screen">
           {Array.isArray(links) && links.length > 0 && (
-            <ul className="flex md:justify-center gap-4">
+            <ul className="flex justify-center gap-4 flex-col">
               {links.map(({ link }, i) => {
                 return (
-                  <li key={i}>
+                  <li key={i} className="self-center">
                     <CMSLink {...link} />
                   </li>
                 )
@@ -46,9 +50,12 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
           )}
         </div>
       </div>
-      <div className="min-h-[80vh] select-none">
+      <div className="select-none">
         {media && typeof media === 'object' && (
-          <Media fill imgClassName="-z-10 object-cover" priority resource={media} />
+          <>
+            <div className="absolute inset-0 bg-brand-blue/50 -z-10" />
+            <Media fill imgClassName="-z-20 object-cover" priority resource={media} />
+          </>
         )}
       </div>
     </div>
