@@ -20,8 +20,8 @@ type CMSLinkType = {
   size?: ButtonProps['size'] | null
   type?: 'custom' | 'reference' | null
   url?: string | null
-  image?: Media | string | null
-  additionalImage?: Media | string | null
+  image?: (number | null) | Media
+  additionalImage?: (number | null) | Media
 }
 
 export const CMSLink: React.FC<CMSLinkType> = (props) => {
@@ -86,7 +86,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
               alt={additionalImage.alt || label || 'Button image'}
               width={20}
               height={15}
-              className="w-full h-auto"
+              // className="w-full h-auto self-center"
             />
           )}
           {label && label}
