@@ -24,11 +24,11 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
       className="relative flex items-center justify-center text-white w-screen h-screen flex-col pt-4 md:pt-8"
       data-theme="dark"
     >
-      <div className="container mb-4 md:mb-8 mt-12 md:mt-24 z-10 relative flex items-center pl-2 md:pl-4">
+      <div className="container ml-38 mb-4 md:mb-8 mt-12 md:mt-24 z-10 relative flex items-center pl-2 md:pl-4">
         <div>
           {richText && (
             <RichText
-              className={cn('mb-6', robotoSerif.className, 'text-white')}
+              className={cn('mb-6', robotoSerif.className)}
               data={richText}
               enableGutter={false}
             />
@@ -42,7 +42,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
               {links.map(({ link }, i) => {
                 return (
                   <li key={i} className="self-center">
-                    <CMSLink {...link} />
+                    <CMSLink className="" {...link} />
                   </li>
                 )
               })}

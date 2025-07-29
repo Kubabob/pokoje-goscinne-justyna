@@ -86,7 +86,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
               alt={additionalImage.alt || label || 'Button image'}
               width={additionalImage.width || 20}
               height={additionalImage.height || 15}
-              // className="w-full h-auto self-center"
+              className="w-full h-auto self-center"
             />
           )}
           {label && label}
