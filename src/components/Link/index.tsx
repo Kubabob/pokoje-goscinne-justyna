@@ -64,14 +64,14 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   /* Handle image buttons */
   if (appearance === 'image' && image && typeof image === 'object') {
     return (
-      <Link href={href || url || ''} {...newTabProps} className={cn('block', className)}>
+      <Link href={href || url || ''} {...newTabProps} className={cn(className)}>
         {image.url && (
           <Image
             src={image.url}
             alt={image.alt || label || 'Button image'}
             width={image.width || 300}
             height={image.height || 200}
-            className="w-full h-auto"
+            className=""
           />
         )}
       </Link>
@@ -79,14 +79,14 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   } else if (additionalImage && typeof additionalImage === 'object') {
     return (
       <Button asChild className={className} size={size} variant={appearance}>
-        <Link className={cn(className, 'gap-1')} href={href || url || ''} {...newTabProps}>
+        <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
           {additionalImage.url && (
             <Image
               src={additionalImage.url}
               alt={additionalImage.alt || label || 'Button image'}
               width={additionalImage.width || 20}
               height={additionalImage.height || 15}
-              className="w-full h-auto self-center"
+              className=""
             />
           )}
           {label && label}

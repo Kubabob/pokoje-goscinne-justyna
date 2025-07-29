@@ -20,12 +20,9 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
   })
 
   return (
-    <div
-      className="relative flex items-center justify-center text-white w-screen h-screen flex-col pt-4 md:pt-8"
-      data-theme="dark"
-    >
-      <div className="container ml-38 mb-4 md:mb-8 mt-12 md:mt-24 z-10 relative flex items-center pl-2 md:pl-4">
-        <div>
+    <div className="relative -mt-[10.4rem] flex items-end text-white">
+      <div className="container z-10 relative pb-8">
+        <div className="max-w-[48rem]">
           {richText && (
             <RichText
               className={cn('mb-6', robotoSerif.className)}
@@ -34,27 +31,23 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
             />
           )}
         </div>
+        {Array.isArray(links) && links.length > 0 && (
+          <ul className="flex gap-4">
+            {links.map(({ link }, i) => {
+              return (
+                <li key={i}>
+                  <CMSLink {...link} />
+                </li>
+              )
+            })}
+          </ul>
+        )}
       </div>
-      <div className="container z-10 relative flex items-center ">
-        <div className="w-screen">
-          {Array.isArray(links) && links.length > 0 && (
-            <ul className="flex justify-center gap-16 flex-col">
-              {links.map(({ link }, i) => {
-                return (
-                  <li key={i} className="self-center">
-                    <CMSLink className="" {...link} />
-                  </li>
-                )
-              })}
-            </ul>
-          )}
-        </div>
-      </div>
-      <div className="select-none">
+      <div className="min-h-[80vh] select-none">
         {media && typeof media === 'object' && (
           <>
-            <div className="absolute inset-0 bg-brand-blue/50 -z-10" />
-            <Media fill imgClassName="-z-20 object-cover" priority resource={media} />
+            <Media fill imgClassName="-z-10 object-cover" priority resource={media} />
+            <div className="absolute pointer-events-none left-0 bottom-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent" />
           </>
         )}
       </div>
