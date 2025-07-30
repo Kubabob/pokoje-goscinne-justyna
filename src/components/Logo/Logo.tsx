@@ -1,11 +1,14 @@
 import clsx from 'clsx'
 import React from 'react'
+import { Roboto_Serif } from 'next/font/google'
 
 interface Props {
   className?: string
   loading?: 'lazy' | 'eager'
   priority?: 'auto' | 'high' | 'low'
 }
+
+const robotoSerif = Roboto_Serif({ subsets: ['latin'] })
 
 export const Logo = (props: Props) => {
   const { loading: loadingFromProps, priority: priorityFromProps, className } = props
@@ -14,29 +17,22 @@ export const Logo = (props: Props) => {
   const priority = priorityFromProps || 'low'
 
   return (
-    /* eslint-disable @next/next/no-img-element */
-    // <img
-    //   alt="Payload Logo"
-    //   width={193}
-    //   height={34}
-    //   loading={loading}
-    //   fetchPriority={priority}
-    //   decoding="async"
-    //   className={clsx(className)}
-    //   src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-logo-light.svg"
-    // />
-    <div className={clsx('logo', className)}>
-      <svg
-        width="193"
-        height="34"
-        viewBox="0 0 193 34"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <text x="0" y="24" fontFamily="Arial, sans-serif" fontSize="20" fontWeight="bold">
-          Pokoje Justyna
-        </text>
-      </svg>
+    <div
+      className={clsx(
+        'logo flex flex-col items-center text-brand-white',
+        className,
+        robotoSerif.className,
+      )}
+      aria-label="Pokoje Gościnne Justyna"
+    >
+      {/* Fix for "POKOJE" with letter spacing offset correction */}
+      <h1 className="tracking-[15px] text-xs font-bold text-center relative">
+        <span className="inline-block ml-[15px]">POKOJE</span>
+      </h1>
+      <h1 className="tracking-[15px] text-xs font-bold text-center relative">
+        <span className="inline-block ml-[15px]">GOŚCINNE</span>
+      </h1>
+      <h2 className="tracking-wide text-5xl text-center">Justyna</h2>
     </div>
   )
 }

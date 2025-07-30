@@ -2,5 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap'); */
-/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap'); */
+/* Animated underline for telephone and email links */
+@layer components {
+  a[href^='tel:'],
+  a[href^='mailto:'] {
+    @apply relative text-inherit;
+    @apply after:absolute after:bg-current after:bottom-0 after:left-0 after:h-[1px] after:w-0;
+    @apply after:transition-all after:duration-300 hover:after:w-full;
+  }
+
+  /* Optional: different colors for each type */
+  /*a[href^='tel:'] {
+    @apply text-blue-600;
+  }
+  a[href^='mailto:'] {
+    @apply text-green-600;
+  }*/
+}

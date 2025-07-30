@@ -21,13 +21,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const { isEnabled } = await draftMode()
 
   return (
-    <html className={cn(montserrat.className)} lang="en" suppressHydrationWarning>
+    <html className={cn(montserrat.className)} lang="pl" suppressHydrationWarning>
       <head>
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
-      <body>
+      <body className="flex flex-col min-h-screen">
         <Providers>
           {/* <AdminBar
             adminBarProps={{
