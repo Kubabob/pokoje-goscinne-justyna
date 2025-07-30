@@ -19,46 +19,115 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
     setHeaderTheme('dark')
   })
 
-  return (
-    <div className="relative h-screen w-full flex items-center mt-[-128px] pt-[100px]">
-      {/* Background media - position to cover entire viewport including under header */}
-      <div className="absolute inset-0 -z-10">
-        {media && typeof media === 'object' && (
-          <>
-            <Media fill imgClassName="object-cover brightness-50" priority resource={media} />
-            <div className="absolute inset-0 bg-black/30" />
-          </>
-        )}
-      </div>
+  const scrollToNextSection = () => {
+    // Find the hero element and get the next sibling element
+    const heroElement = document.querySelector('.hero-section')
+    const nextSection = heroElement?.nextElementSibling
 
-      {/* Content container */}
-      <div className="container flex flex-col mx-auto px-4 md:px-6 relative z-10 gap-20">
-        {/* Text container - left aligned */}
-        <div className="max-w-xl text-left">
-          {richText && (
-            <RichText
-              className={cn('text-brand-white mb-8', robotoSerif.className)}
-              data={richText}
-              enableGutter={false}
-            />
+    // Scroll to the next section if it exists
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  return (
+    <>
+      {/* Custom keyframe animations for glowing and opacity effects */}
+      <style jsx>{`
+        @keyframes glowPulse {
+          0% {
+            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5))
+              drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+          }
+          50% {
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8))
+              drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+          }
+          100% {
+            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5))
+              drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+          }
+        }
+
+        @keyframes opacityPulse {
+          0% {
+            opacity: 0.5;
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0.5;
+          }
+        }
+
+        .arrow-animation {
+          animation:
+            glowPulse 4s infinite ease-in-out,
+            opacityPulse 4s infinite ease-in-out;
+        }
+      `}</style>
+
+      <div className="relative h-screen w-full flex items-center mt-[-128px] pt-[100px] hero-section">
+        {/* Background media - position to cover entire viewport including under header */}
+        <div className="absolute inset-0 -z-10">
+          {media && typeof media === 'object' && (
+            <>
+              <Media fill imgClassName="object-cover brightness-50" priority resource={media} />
+              <div className="absolute inset-0 bg-black/30" />
+            </>
           )}
         </div>
 
-        {/* Links container - centered */}
-        {Array.isArray(links) && links.length > 0 && (
-          <div className="w-full flex justify-center mt-8">
-            <ul className="flex flex-col items-center gap-4 md:flex-row">
-              {links.map(({ link }, i) => {
-                return (
-                  <li key={i}>
-                    <CMSLink {...link} className="text-brand-white" />
-                  </li>
-                )
-              })}
-            </ul>
+        {/* Content container */}
+        <div className="container flex flex-col mx-auto px-4 md:px-6 relative z-10 gap-20">
+          {/* Text container - left aligned */}
+          <div className="max-w-xl text-left">
+            {richText && (
+              <RichText
+                className={cn('text-brand-white mb-8', robotoSerif.className)}
+                data={richText}
+                enableGutter={false}
+              />
+            )}
           </div>
-        )}
+
+          {/* Links container - centered */}
+          {Array.isArray(links) && links.length > 0 && (
+            <div className="w-full flex justify-center mt-8">
+              <ul className="flex flex-col items-center gap-4 md:flex-row">
+                {links.map(({ link }, i) => {
+                  return (
+                    <li key={i}>
+                      <CMSLink {...link} className="text-brand-white" />
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+          )}
+        </div>
+
+        {/* Glowing arrow scroll indicator with opacity animation */}
+        <div
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer z-20"
+          onClick={scrollToNextSection}
+        >
+          <div className="flex items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="50"
+              height="50"
+              viewBox="0 0 24 24"
+              className="arrow-animation"
+              fill="white"
+            >
+              <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8z" />
+              <path d="M12 12.586 8.707 9.293l-1.414 1.414L12 15.414l4.707-4.707-1.414-1.414L12 12.586z" />
+            </svg>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
