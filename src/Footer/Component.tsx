@@ -24,6 +24,8 @@ export async function Footer() {
     navColumns.push(navItems.slice(i, i + 4))
   }
 
+  const currentYear = new Date().getFullYear()
+
   return (
     <footer className="bg-brand-blue py-6 md:py-8 mt-auto">
       <div className="container mx-auto px-4 md:px-6">
@@ -92,6 +94,22 @@ export async function Footer() {
               </nav>
             ))}
           </div>
+        </div>
+
+        {/* Copyright notice - visible on all screen sizes */}
+        <div className="text-brand-white/70 text-xs md:text-sm mt-6 md:mt-8 text-center">
+          <p>© {currentYear} Pokoje Gościnne Justyna</p>
+          <p className="mt-1 md:mt-2">
+            made with ❤️ by{' '}
+            <a
+              href="https://github.com/Kubabob"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-white hover:text-brand-white/80 transition-colors"
+            >
+              Kuba Bożek
+            </a>
+          </p>
         </div>
       </div>
     </footer>
