@@ -80,17 +80,24 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     return (
       <Button asChild className={className} size={size} variant={appearance}>
         <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
-          {additionalImage.url && (
-            <Image
-              src={additionalImage.url}
-              alt={additionalImage.alt || label || 'Button image'}
-              width={additionalImage.width || 20}
-              height={additionalImage.height || 15}
-              className=""
-            />
-          )}
-          {label && label}
-          {children && children}
+          <span className="flex items-center gap-2">
+            {additionalImage.url && (
+              <Image
+                src={additionalImage.url}
+                alt={additionalImage.alt || label || 'Button image'}
+                width={size === 'sm' ? 16 : size === 'lg' ? 24 : 20}
+                height={size === 'sm' ? 16 : size === 'lg' ? 24 : 20}
+                className="object-contain"
+              />
+            )}
+
+            {(label || children) && (
+              <span>
+                {label && label}
+                {children && children}
+              </span>
+            )}
+          </span>
         </Link>
       </Button>
     )
