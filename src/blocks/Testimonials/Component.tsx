@@ -4,6 +4,11 @@ import RichText from '@/components/RichText'
 import type { TestimonialsBlock as TestimonialsBlockProps } from '@/payload-types'
 import { Button } from '@/components/ui/button'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { CMSLink } from '@/components/Link'
+import { Roboto_Serif } from 'next/font/google'
+import { cn } from '@/utilities/ui'
+
+const robotoSerif = Roboto_Serif({ subsets: ['latin'] })
 
 export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
   const { testimonials } = props
@@ -62,14 +67,23 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
   }
 
   return (
-    <div className="relative w-full py-12 bg-gray-100">
+    <div className="relative w-full py-12 bg-brand-white">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
+          <h2
+            className={cn(
+              robotoSerif.className,
+              'text-brand-blue font-bold tracking-[0.02em] text-3xl mb-8 text-center',
+            )}
+          >
+            Opinie
+          </h2>
+
           {testimonials && testimonials.length > 0 ? (
             <div className="relative" id="testimonials-carousel" data-carousel="slide">
               {/* Carousel wrapper */}
               <div
-                className="relative overflow-hidden rounded-lg"
+                className="relative overflow-hidden rounded-lg h-52"
                 ref={carouselRef}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
@@ -83,22 +97,20 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
                     }`}
                     data-carousel-item
                   >
-                    <div className="bg-white rounded-lg shadow-md p-6">
-                      <div className="mb-4">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <span key={i} className="text-yellow-500">
-                            ★
-                          </span>
-                        ))}
-                      </div>
-
+                    <div className="bg-brand-white rounded-lg p-6 h-full overflow-y-auto flex flex-col">
                       {testimonial.testimonial && (
-                        <blockquote className="text-gray-700 italic mb-4">
-                          <RichText data={testimonial.testimonial} />
+                        <blockquote className="text-brand-blue mb-4 text-base">
+                          <RichText data={testimonial.testimonial} className="mx-0 px-0" />
                         </blockquote>
                       )}
 
-                      {testimonial.author && <h3 className="text-black">{testimonial.author}</h3>}
+                      {testimonial.author && (
+                        <div className="flex justify-start">
+                          <h3 className="text-brand-blue font-medium text-lg">
+                            {testimonial.author}
+                          </h3>
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -111,7 +123,7 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
                     key={index}
                     type="button"
                     className={`w-3 h-3 rounded-full ${
-                      index === currentIndex ? 'bg-primary' : 'bg-gray-300'
+                      index === currentIndex ? 'bg-gray-500' : 'bg-gray-300'
                     }`}
                     aria-current={index === currentIndex ? 'true' : 'false'}
                     aria-label={`Testimonial ${index + 1}`}
@@ -120,33 +132,44 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
                   />
                 ))}
               </div>
-
-              {/* Slider controls */}
-              {testimonials.length > 1 && (
-                <>
-                  <button
-                    type="button"
-                    className="absolute top-1/2 -translate-y-1/2 left-2 z-30 flex items-center justify-center w-10 h-10 rounded-full bg-white/70 hover:bg-white focus:outline-none shadow-md"
-                    data-carousel-prev
-                    onClick={goToPrevSlide}
-                  >
-                    <ChevronLeft className="w-5 h-5" />
-                    <span className="sr-only">Previous</span>
-                  </button>
-                  <button
-                    type="button"
-                    className="absolute top-1/2 -translate-y-1/2 right-2 z-30 flex items-center justify-center w-10 h-10 rounded-full bg-white/70 hover:bg-white focus:outline-none shadow-md"
-                    data-carousel-next
-                    onClick={goToNextSlide}
-                  >
-                    <ChevronRight className="w-5 h-5" />
-                    <span className="sr-only">Next</span>
-                  </button>
-                </>
-              )}
             </div>
           ) : (
             <div className="text-center text-gray-500">No testimonials available</div>
+          )}
+
+          {/* Navigation buttons in separate container below */}
+          {testimonials && testimonials.length > 1 && (
+            <div className="container mx-auto mt-12">
+              <div className="flex items-center max-w-xs mx-auto justify-center gap-5">
+                <CMSLink
+                  type="custom"
+                  url="#"
+                  appearance="default"
+                  className="flex items-center justify-center w-10 h-10 bg-brand-orange text-white hover:bg-brand-orange/90 focus:outline-none shadow-md"
+                  label=""
+                  onClick={(e) => {
+                    e.preventDefault()
+                    goToPrevSlide()
+                  }}
+                >
+                  <ChevronLeft size={26} strokeWidth={2.5} className="flex-shrink-0" />
+                </CMSLink>
+
+                <CMSLink
+                  type="custom"
+                  url="#"
+                  appearance="default"
+                  className="flex items-center justify-center w-10 h-10 bg-brand-orange text-white hover:bg-brand-orange/90 focus:outline-none shadow-md"
+                  label=""
+                  onClick={(e) => {
+                    e.preventDefault()
+                    goToNextSlide()
+                  }}
+                >
+                  <ChevronRight size={26} strokeWidth={2.5} className="flex-shrink-0" />
+                </CMSLink>
+              </div>
+            </div>
           )}
         </div>
       </div>

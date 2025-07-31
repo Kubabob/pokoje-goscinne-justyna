@@ -22,6 +22,7 @@ type CMSLinkType = {
   url?: string | null
   image?: (number | null) | Media
   additionalImage?: (number | null) | Media
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void
 }
 
 export const CMSLink: React.FC<CMSLinkType> = (props) => {
@@ -37,6 +38,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     url,
     image,
     additionalImage,
+    onClick,
   } = props
 
   const href =
@@ -54,7 +56,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   /* Ensure we don't break any styles set by richText */
   if (appearance === 'inline') {
     return (
-      <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
+      <Link className={cn(className)} href={href || url || ''} {...newTabProps} onClick={onClick}>
         {label && label}
         {children && children}
       </Link>
@@ -64,7 +66,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   /* Handle image buttons */
   if (appearance === 'image' && image && typeof image === 'object') {
     return (
-      <Link href={href || url || ''} {...newTabProps} className={cn(className)}>
+      <Link href={href || url || ''} {...newTabProps} className={cn(className)} onClick={onClick}>
         {image.url && (
           <Image
             src={image.url}
@@ -79,7 +81,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   } else if (additionalImage && typeof additionalImage === 'object') {
     return (
       <Button asChild className={className} size={size} variant={appearance}>
-        <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
+        <Link className={cn(className)} href={href || url || ''} {...newTabProps} onClick={onClick}>
           <span className="flex items-center gap-2">
             {additionalImage.url && (
               <Image
@@ -104,7 +106,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   } else {
     return (
       <Button asChild className={className} size={size} variant={appearance}>
-        <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
+        <Link className={cn(className)} href={href || url || ''} {...newTabProps} onClick={onClick}>
           {label && label}
           {children && children}
         </Link>

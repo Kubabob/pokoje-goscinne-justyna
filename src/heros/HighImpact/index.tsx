@@ -26,7 +26,11 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
 
     // Scroll to the next section if it exists
     if (nextSection) {
-      nextSection.scrollIntoView({ behavior: 'smooth' })
+      window.scrollBy({
+        top: window.innerHeight, // 100vh
+        left: 0,
+        behavior: 'smooth',
+      })
     }
   }
 
