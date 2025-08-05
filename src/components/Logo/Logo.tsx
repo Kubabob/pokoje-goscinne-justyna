@@ -6,12 +6,13 @@ interface Props {
   className?: string
   loading?: 'lazy' | 'eager'
   priority?: 'auto' | 'high' | 'low'
+  theme?: string | null
 }
 
 const robotoSerif = Roboto_Serif({ subsets: ['latin'] })
 
 export const Logo = (props: Props) => {
-  const { loading: loadingFromProps, priority: priorityFromProps, className } = props
+  const { loading: loadingFromProps, priority: priorityFromProps, className, theme } = props
 
   const loading = loadingFromProps || 'lazy'
   const priority = priorityFromProps || 'low'
@@ -19,7 +20,11 @@ export const Logo = (props: Props) => {
   return (
     <div
       className={clsx(
-        'logo flex flex-col items-center text-brand-white',
+        'logo flex flex-col items-center',
+        {
+          'text-brand-white': theme === 'dark',
+          'text-brand-black': theme === 'light',
+        },
         className,
         robotoSerif.className,
       )}

@@ -3,6 +3,7 @@ import { useHeaderTheme } from '@/providers/HeaderTheme'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import { cn } from '@/utilities/ui'
 
 import type { Header } from '@/payload-types'
 
@@ -22,10 +23,14 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  // Close mobile menu when navigating to a new page
+  // Set header theme based on path and close mobile menu
   useEffect(() => {
     setMobileMenuOpen(false)
-    setHeaderTheme(null)
+    if (pathname === '/') {
+      setHeaderTheme('dark')
+    } else {
+      setHeaderTheme('light')
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
@@ -47,20 +52,29 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   }, [mobileMenuOpen])
 
   return (
-    <header className="py-4 md:py-6 relative z-50" {...(theme ? { 'data-theme': theme } : {})}>
+    <header
+      className={cn(
+        'py-4 md:py-6 relative z-50',
+        theme === 'dark' ? 'text-brand-white' : 'text-brand-black',
+      )}
+      {...(theme ? { 'data-theme': theme } : {})}
+    >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
         <Link href="/" className="flex-shrink-0 relative z-10">
-          <Logo loading="eager" priority="high" className="" />
+          <Logo theme={theme} loading="eager" priority="high" className="" />
         </Link>
 
         {/* Desktop Navigation - Hidden on mobile */}
         <div className="hidden md:block">
-          <HeaderNav data={data} />
+          <HeaderNav data={data} theme={theme} />
         </div>
 
         {/* Mobile Menu Button - Only visible on mobile */}
         <button
-          className="md:hidden relative z-10 text-brand-white p-2"
+          className={cn(
+            'md:hidden relative z-10 p-2',
+            theme === 'dark' ? 'text-brand-white' : 'text-brand-black',
+          )}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
         >
@@ -68,7 +82,12 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         </button>
 
         {/* Mobile Menu Panel */}
-        <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} data={data} />
+        <MobileMenu
+          isOpen={mobileMenuOpen}
+          onClose={() => setMobileMenuOpen(false)}
+          data={data}
+          theme={theme}
+        />
       </div>
     </header>
   )

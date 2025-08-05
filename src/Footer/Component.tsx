@@ -60,39 +60,41 @@ export async function Footer() {
         </div>
 
         {/* Desktop layout: Logo visible, full layout */}
-        <div className="hidden md:flex md:flex-row md:justify-between md:items-center">
-          {/* Logo - Only visible on md screens and up */}
-          <div className="flex items-center">
+        <div className="hidden md:grid md:grid-cols-3 md:items-center md:gap-8">
+          {/* Logo - First column */}
+          <div className="flex justify-start">
             <Link href="/" className="inline-block">
-              <Logo />
+              <Logo theme={'dark'} />
             </Link>
           </div>
 
-          {/* Info content */}
+          {/* Info content - Second column, centered */}
           {infoContent && (
-            <div className="text-left max-w-md flex items-center">
+            <div className="flex justify-center text-center">
               <RichText
-                className="text-brand-white text-sm [&>p]:m-0" /* Removed default margins */
+                className="text-brand-white text-sm [&>p]:m-0 text-left" /* Text align left */
                 data={infoContent}
                 enableGutter={false}
-                enableProse={false} /* Disabled prose to remove default styling */
+                enableProse={false}
               />
             </div>
           )}
 
-          {/* Navigation - Columnar layout with animated underline */}
-          <div className="flex flex-row space-x-8">
-            {navColumns.map((column, colIndex) => (
-              <nav key={`col-${colIndex}`} className="flex flex-col items-end space-y-3">
-                {column.map(({ link }: { link: any }, i: number) => (
-                  <CMSLink
-                    className={`text-brand-white text-base pb-1 ${animatedLinkClass}`}
-                    key={i}
-                    {...link}
-                  />
-                ))}
-              </nav>
-            ))}
+          {/* Navigation - Third column, aligned to the end */}
+          <div className="flex justify-end">
+            <div className="flex flex-row space-x-8">
+              {navColumns.map((column, colIndex) => (
+                <nav key={`col-${colIndex}`} className="flex flex-col items-start space-y-3">
+                  {column.map(({ link }: { link: any }, i: number) => (
+                    <CMSLink
+                      className={`text-brand-white text-base pb-1 ${animatedLinkClass}`}
+                      key={i}
+                      {...link}
+                    />
+                  ))}
+                </nav>
+              ))}
+            </div>
           </div>
         </div>
 

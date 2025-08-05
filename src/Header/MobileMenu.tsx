@@ -9,13 +9,14 @@ interface MobileMenuProps {
   isOpen: boolean
   onClose: () => void
   data: HeaderType
+  theme?: string | null
 }
 
 // Custom animated underline style - same as footer but with slight adjustments for mobile
 const animatedLinkClass =
   'relative after:absolute after:bg-brand-white after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:transition-all after:duration-300 hover:after:w-full'
 
-export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, data }) => {
+export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, data, theme }) => {
   const navItems = data?.navItems || []
   const menuRef = useRef<HTMLDivElement>(null)
 

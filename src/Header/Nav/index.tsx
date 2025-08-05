@@ -5,15 +5,19 @@ import React from 'react'
 import type { Header as HeaderType } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
-import Link from 'next/link'
-import { SearchIcon } from 'lucide-react'
+import { cn } from '@/utilities/ui'
 
-// Custom animated underline style - same as footer
-const animatedLinkClass =
-  'relative after:absolute after:bg-brand-white after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:transition-all after:duration-300 hover:after:w-full'
+interface HeaderNavProps {
+  data: HeaderType
+  theme?: string | null
+}
 
-export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
+export const HeaderNav: React.FC<HeaderNavProps> = ({ data, theme }) => {
   const navItems = data?.navItems || []
+
+  const animatedLinkClass = `relative after:absolute ${
+    theme === 'dark' ? 'after:bg-brand-white' : 'after:bg-brand-black'
+  } after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:transition-all after:duration-300 hover:after:w-full`
 
   return (
     <nav className="flex items-center space-x-6">
@@ -23,7 +27,11 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
             key={i}
             {...link}
             appearance="inline"
-            className={`text-brand-white text-lg pb-1 ${animatedLinkClass}`}
+            className={cn(
+              'text-lg pb-1',
+              theme === 'dark' ? 'text-brand-white' : 'text-brand-black',
+              animatedLinkClass,
+            )}
           />
         )
       })}
