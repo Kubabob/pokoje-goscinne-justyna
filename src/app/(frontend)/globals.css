@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply text-brand-blue;
+  }
+}
+
 /* Animated underline for telephone and email links */
 @layer components {
   a[href^='tel:'],

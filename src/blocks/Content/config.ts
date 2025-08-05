@@ -5,11 +5,15 @@ import {
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
-  InlineCodeFeature,
-  ParagraphFeature,
-  AlignFeature,
-  IndentFeature,
 } from '@payloadcms/richtext-lexical'
+
+import {
+  TextColorFeature,
+  TextSizeFeature,
+  TextLetterSpacingFeature,
+  TextLineHeightFeature,
+  TextFontFamilyFeature,
+} from 'payload-lexical-typography'
 
 import { link } from '@/fields/link'
 
@@ -41,10 +45,10 @@ const columnFields: Field[] = [
     name: 'richText',
     type: 'richText',
     editor: lexicalEditor({
-      features: ({ rootFeatures }) => {
+      features: ({ defaultFeatures }) => {
         return [
-          ...rootFeatures,
-          HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
+          ...defaultFeatures,
+          HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3'] }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
         ]

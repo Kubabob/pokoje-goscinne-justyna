@@ -13,14 +13,14 @@ export const HeroBlock: React.FC<HeroBlockProps> = (props) => {
   const { richText } = props
   return (
     <div
-      className="relative -mt-[10.4rem] flex items-center justify-center text-black w-screen h-screen flex-col"
+      className="relative -mt-[10.4rem] flex items-center justify-center text-brand-blue w-screen h-screen flex-col"
       data-theme="dark"
     >
       <div className="container mb-8 mt-24 z-10 relative flex items-center pl-4">
         <div className="max-w-[36.5rem]">
           {richText && (
             <RichText
-              className={cn('mb-6', robotoSerif.className, 'text-black')}
+              className={cn('mb-6', robotoSerif.className, 'text-brand-blue')}
               data={richText}
               // enableGutter={false}
             />

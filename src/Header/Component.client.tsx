@@ -55,7 +55,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     <header
       className={cn(
         'py-4 md:py-6 relative z-50',
-        theme === 'dark' ? 'text-brand-white' : 'text-brand-black',
+        theme === 'dark' ? 'text-brand-white' : 'text-brand-blue',
       )}
       {...(theme ? { 'data-theme': theme } : {})}
     >
@@ -73,7 +73,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         <button
           className={cn(
             'md:hidden relative z-10 p-2',
-            theme === 'dark' ? 'text-brand-white' : 'text-brand-black',
+            theme === 'dark' ? 'text-brand-white' : 'text-brand-blue',
           )}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}

@@ -7,7 +7,7 @@ export const Opinions: React.FC<OpinionProps> = (props) => {
 
   return (
     <div className="container my-16">
-      {author && <h2 className="text-black">{author}</h2>}
+      {author && <h2 className="text-brand-blue">{author}</h2>}
       {opinion && <RichText data={opinion} />}
     </div>
   )

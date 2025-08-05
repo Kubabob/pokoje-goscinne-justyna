@@ -16,7 +16,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ data, theme }) => {
   const navItems = data?.navItems || []
 
   const animatedLinkClass = `relative after:absolute ${
-    theme === 'dark' ? 'after:bg-brand-white' : 'after:bg-brand-black'
+    theme === 'dark' ? 'after:bg-brand-white' : 'after:bg-brand-blue'
   } after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:transition-all after:duration-300 hover:after:w-full`
 
   return (
@@ -29,7 +29,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ data, theme }) => {
             appearance="inline"
             className={cn(
               'text-lg pb-1',
-              theme === 'dark' ? 'text-brand-white' : 'text-brand-black',
+              theme === 'dark' ? 'text-brand-white' : 'text-brand-blue',
               animatedLinkClass,
             )}
           />

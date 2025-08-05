@@ -23,7 +23,7 @@ export const Logo = (props: Props) => {
         'logo flex flex-col items-center',
         {
           'text-brand-white': theme === 'dark',
-          'text-brand-black': theme === 'light',
+          'text-brand-blue': theme === 'light',
         },
         className,
         robotoSerif.className,
