@@ -36,49 +36,13 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
 
   return (
     <>
-      {/* Custom keyframe animations for glowing and opacity effects */}
-      <style jsx>{`
-        @keyframes glowPulse {
-          0% {
-            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5))
-              drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
-          }
-          50% {
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8))
-              drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
-          }
-          100% {
-            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5))
-              drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
-          }
-        }
-
-        @keyframes opacityPulse {
-          0% {
-            opacity: 0.5;
-          }
-          50% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0.5;
-          }
-        }
-
-        .arrow-animation {
-          animation:
-            glowPulse 4s infinite ease-in-out,
-            opacityPulse 4s infinite ease-in-out;
-        }
-      `}</style>
-
       <div className="relative h-screen w-full flex items-center mt-[-128px] pt-[100px] hero-section">
         {/* Background media - position to cover entire viewport including under header */}
         <div className="absolute inset-0 -z-10">
           {media && typeof media === 'object' && (
             <>
               <Media fill imgClassName="object-cover brightness-50" priority resource={media} />
-              <div className="absolute inset-0 bg-black/30" />
+              <div className="absolute inset-0 bg-brand-blue/30" />
             </>
           )}
         </div>

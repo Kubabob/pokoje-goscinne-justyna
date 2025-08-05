@@ -80,10 +80,14 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
           </h2>
 
           {testimonials && testimonials.length > 0 ? (
-            <div className="relative" id="testimonials-carousel" data-carousel="slide">
+            <div
+              className="relative flex flex-col content-center items-center"
+              id="testimonials-carousel"
+              data-carousel="slide"
+            >
               {/* Carousel wrapper */}
               <div
-                className="relative overflow-hidden rounded-lg h-52"
+                className="relative overflow-hidden rounded-lg h-44 w-[75vw]"
                 ref={carouselRef}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
@@ -97,16 +101,16 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
                     }`}
                     data-carousel-item
                   >
-                    <div className="bg-brand-white rounded-lg p-6 h-full overflow-y-auto flex flex-col">
+                    <div className="bg-brand-white rounded-lg p-6 flex flex-col items-center">
                       {testimonial.testimonial && (
-                        <blockquote className="text-brand-blue mb-4 text-base">
+                        <blockquote className="text-brand-blue mb-4 text-base text-left w-full max-w-prose">
                           <RichText data={testimonial.testimonial} className="mx-0 px-0" />
                         </blockquote>
                       )}
 
                       {testimonial.author && (
-                        <div className="flex justify-start">
-                          <h3 className="text-brand-blue font-medium text-lg">
+                        <div className="w-full max-w-prose">
+                          <h3 className="text-brand-blue font-medium text-lg text-left">
                             {testimonial.author}
                           </h3>
                         </div>
@@ -117,7 +121,7 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
               </div>
 
               {/* Slider indicators */}
-              <div className="absolute z-30 flex -translate-x-1/2 bottom-0 left-1/2 space-x-3 rtl:space-x-reverse">
+              <div className="relative z-30 flex gap-2">
                 {testimonials.map((_, index) => (
                   <button
                     key={index}
