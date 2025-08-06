@@ -8,7 +8,7 @@ export const MapBlock: Block = {
       name: 'mapLinkText',
       type: 'text',
       label: 'MapLinkText',
-      required: true,
+      // required: true,
     },
     {
       name: 'location',
@@ -20,12 +20,14 @@ export const MapBlock: Block = {
       name: 'width',
       type: 'number',
       label: 'Width',
+      required: true,
       defaultValue: 425,
     },
     {
       name: 'height',
       type: 'number',
       label: 'Height',
+      required: true,
       defaultValue: 350,
     },
   ],

@@ -5,23 +5,21 @@ import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 
 // Fix for default markers not showing
-import icon from 'leaflet/dist/images/marker-icon.png'
-import iconShadow from 'leaflet/dist/images/marker-shadow.png'
+import icon from 'public/media/marker-icon.png'
+import iconShadow from 'public/media/marker-shadow.png'
 
-let DefaultIcon = L.icon({
+const DefaultIcon = L.icon({
   iconUrl: icon.src,
   shadowUrl: iconShadow.src,
   iconSize: [25, 41],
-  iconAnchor: [12, 41],
+  iconAnchor: [14, 12],
 })
-
-L.Marker.prototype.options.icon = DefaultIcon
 
 type OpenStreetMapType = {
   mapLinkText?: string
   location: [number, number]
-  width?: number
-  height?: number
+  width: number
+  height: number
 }
 
 export const OpenStreetMap: React.FC<OpenStreetMapType> = (props) => {
@@ -38,18 +36,21 @@ export const OpenStreetMap: React.FC<OpenStreetMapType> = (props) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={[location[1], location[0]]}>
+        <Marker position={[location[1], location[0]]} icon={DefaultIcon}>
           <Popup>{mapLinkText}</Popup>
         </Marker>
       </MapContainer>
       <small>
-        <a
-          href={`https://www.openstreetmap.org/?mlat=${location[1]}&mlon=${location[0]}#map=17/${location[1]}/${location[0]}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {mapLinkText}
-        </a>
+        {mapLinkText && (
+          <a
+            className="animatedUnderline"
+            href={`https://www.openstreetmap.org/?mlat=${location[1]}&mlon=${location[0]}#map=17/${location[1]}/${location[0]}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {mapLinkText}
+          </a>
+        )}
       </small>
     </div>
   )

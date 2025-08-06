@@ -17,18 +17,23 @@ import type {
   BannerBlock as BannerBlockProps,
   CallToActionBlock as CTABlockProps,
   MediaBlock as MediaBlockProps,
+  MapBlock as MapBlockProps,
 } from '@/payload-types'
 import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
+import { MapBlock } from '@/blocks/MapBlock/Component'
 import { cn } from '@/utilities/ui'
 import {
   TypographyJSXConverters,
   TypographyHTMLConverters,
 } from 'payload-lexical-typography/converters'
+import { LinkHTMLConverter } from '@payloadcms/richtext-lexical/html'
 
 type NodeTypes =
   | DefaultNodeTypes
-  | SerializedBlockNode<CTABlockProps | MediaBlockProps | BannerBlockProps | CodeBlockProps>
+  | SerializedBlockNode<
+      CTABlockProps | MediaBlockProps | BannerBlockProps | CodeBlockProps | MapBlockProps
+    >
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
   const { value, relationTo } = linkNode.fields.doc!
@@ -43,6 +48,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
   ...defaultConverters,
   ...TypographyJSXConverters,
   ...LinkJSXConverter({ internalDocToHref }),
+  ...LinkHTMLConverter,
   blocks: {
     banner: ({ node }) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
     mediaBlock: ({ node }) => (
@@ -57,6 +63,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     ),
     code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
     cta: ({ node }) => <CallToActionBlock {...node.fields} />,
+    mapBlock: ({ node }) => <MapBlock {...node.fields} />,
   },
 })
 

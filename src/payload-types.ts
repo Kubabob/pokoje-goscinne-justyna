@@ -899,14 +899,14 @@ export interface ExpandableBlock {
  * via the `definition` "MapBlock".
  */
 export interface MapBlock {
-  mapLinkText: string;
+  mapLinkText?: string | null;
   /**
    * @minItems 2
    * @maxItems 2
    */
   location: [number, number];
-  width?: number | null;
-  height?: number | null;
+  width: number;
+  height: number;
   id?: string | null;
   blockName?: string | null;
   blockType: 'mapBlock';
@@ -2002,6 +2002,17 @@ export interface TaskSchedulePublish {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CodeBlock".
+ */
+export interface CodeBlock {
+  language?: ('typescript' | 'javascript' | 'css') | null;
+  code: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'code';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "BannerBlock".
  */
 export interface BannerBlock {
@@ -2024,17 +2035,6 @@ export interface BannerBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'banner';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CodeBlock".
- */
-export interface CodeBlock {
-  language?: ('typescript' | 'javascript' | 'css') | null;
-  code: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'code';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

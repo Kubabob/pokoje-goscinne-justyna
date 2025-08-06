@@ -30,7 +30,8 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ data, theme }) => {
             className={cn(
               'text-lg pb-1',
               theme === 'dark' ? 'text-brand-white' : 'text-brand-blue',
-              animatedLinkClass,
+              // animatedLinkClass,
+              'animatedUnderline',
             )}
           />
         )

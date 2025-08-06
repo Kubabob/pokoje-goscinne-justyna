@@ -17,13 +17,16 @@
     @apply after:transition-all after:duration-300 hover:after:w-full;
   }
 
-  /* Optional: different colors for each type */
-  /*a[href^='tel:'] {
-    @apply text-blue-600;
+  a {
+    @apply no-underline text-inherit;
+    text-decoration: none !important;
   }
-  a[href^='mailto:'] {
-    @apply text-green-600;
-  }*/
+
+  .animatedUnderline {
+    @apply relative text-inherit;
+    @apply after:absolute after:bg-current after:bottom-0 after:left-0 after:h-[1px] after:w-0;
+    @apply after:transition-all after:duration-300 hover:after:w-full;
+  }
 }
 
 @keyframes glowPulse {

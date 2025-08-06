@@ -87,7 +87,7 @@ export async function Footer() {
                 <nav key={`col-${colIndex}`} className="flex flex-col items-start space-y-3">
                   {column.map(({ link }: { link: any }, i: number) => (
                     <CMSLink
-                      className={`text-brand-white text-base pb-1 ${animatedLinkClass}`}
+                      className={`text-brand-white text-base pb-1 animatedUnderline`}
                       key={i}
                       {...link}
                     />
@@ -107,7 +107,7 @@ export async function Footer() {
               href="https://github.com/Kubabob"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-brand-white hover:text-brand-white/80 transition-colors"
+              className="text-brand-white hover:text-brand-white/80 transition-colors animatedUnderline"
             >
               Kuba Bożek
             </a>

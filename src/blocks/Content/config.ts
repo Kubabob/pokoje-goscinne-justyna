@@ -4,6 +4,7 @@ import {
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
+  BlocksFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
@@ -14,6 +15,9 @@ import {
   TextLineHeightFeature,
   TextFontFamilyFeature,
 } from 'payload-lexical-typography'
+
+import { MapBlock } from '../MapBlock/config'
+import { Code } from '../Code/config'
 
 import { link } from '@/fields/link'
 
@@ -49,6 +53,7 @@ const columnFields: Field[] = [
         return [
           ...defaultFeatures,
           HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3'] }),
+          BlocksFeature({ blocks: [MapBlock, Code] }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
         ]

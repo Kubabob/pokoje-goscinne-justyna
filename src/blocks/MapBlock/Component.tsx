@@ -1,7 +1,10 @@
-// 'use client'
+'use client'
 import React from 'react'
+import dynamic from 'next/dynamic'
 
-import { OpenStreetMap } from '@/components/Map'
+const OpenStreetMap = dynamic(() => import('@/components/Map').then((mod) => mod.OpenStreetMap), {
+  ssr: false,
+})
 import type { MapBlock as MapBlockProps } from '@/payload-types'
 
 export const MapBlock: React.FC<MapBlockProps> = (props) => {
