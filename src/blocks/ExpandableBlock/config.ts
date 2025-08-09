@@ -32,6 +32,25 @@ export const ExpandableBlock: Block = {
               },
             },
             {
+              name: 'mediaSize',
+              type: 'group',
+              fields: [
+                {
+                  name: 'height',
+                  type: 'number',
+                },
+                {
+                  name: 'width',
+                  type: 'number',
+                },
+              ],
+              admin: {
+                condition: (_, siblingData) => {
+                  return Boolean(siblingData?.enableMedia)
+                },
+              },
+            },
+            {
               name: 'title',
               type: 'text',
               required: true,

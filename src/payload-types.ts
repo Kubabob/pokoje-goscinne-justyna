@@ -856,6 +856,10 @@ export interface ExpandableBlock {
         id?: string | null;
       }[]
     | null;
+  mediaSize?: {
+    height?: number | null;
+    width?: number | null;
+  };
   title: string;
   enableButton?: boolean | null;
   buttonText?: {
@@ -1395,6 +1399,12 @@ export interface ExpandableBlockSelect<T extends boolean = true> {
     | {
         media?: T;
         id?: T;
+      };
+  mediaSize?:
+    | T
+    | {
+        height?: T;
+        width?: T;
       };
   title?: T;
   enableButton?: T;
