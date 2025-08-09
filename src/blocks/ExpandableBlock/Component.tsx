@@ -172,22 +172,22 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
               <Button
                 variant="orange"
                 size="icon"
-                className="transition-transform duration-300 pointer-events-none my-auto md:h-10 md:w-10 h-8 w-8"
+                className="transition-transform duration-300 pointer-events-none my-auto md:h-10 md:w-10 h-8 w-8 rounded-[50%]"
               >
                 <Plus
                   className={`transform transition-transform group-open:rotate-45 rotate-0 text-brand-white md:h-6 md:w-6 h-4 w-4`}
                 />
                 <span className="sr-only">{isExpanded ? 'Collapse' : 'Expand'}</span>
               </Button>
-              <span className="text-brand-blue font-medium text-sm md:text-lg">SZCZEGÓŁY</span>
+              <span className="text-brand-blue font-semibold text-sm md:text-xl">SZCZEGÓŁY</span>
             </div>
 
             {/* Action Button */}
             {enableButton && buttonText && (
-              <Button variant="orange" className="">
+              <Button variant="orange" className="md:py-7">
                 <RichText
                   data={buttonText}
-                  className="font-medium text-sm md:text-lg text-brand-white"
+                  className="font-semibold text-sm md:text-xl text-brand-white"
                 />
               </Button>
             )}
