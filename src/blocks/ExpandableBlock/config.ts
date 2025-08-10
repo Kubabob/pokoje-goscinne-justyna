@@ -1,3 +1,9 @@
+import {
+  lexicalEditor,
+  HeadingFeature,
+  FixedToolbarFeature,
+  InlineToolbarFeature,
+} from '@payloadcms/richtext-lexical'
 import type { Block } from 'payload'
 
 export const ExpandableBlock: Block = {
@@ -84,6 +90,16 @@ export const ExpandableBlock: Block = {
             {
               name: 'content',
               type: 'richText',
+              editor: lexicalEditor({
+                features: ({ defaultFeatures }) => {
+                  return [
+                    ...defaultFeatures,
+                    // HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+                    FixedToolbarFeature(),
+                    InlineToolbarFeature(),
+                  ]
+                },
+              }),
             },
           ],
         },

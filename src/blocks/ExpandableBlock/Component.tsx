@@ -116,7 +116,7 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
             </div>
 
             {/* Slider indicators */}
-            <div className="absolute z-30 flex -translate-x-1/2 bottom-4 left-1/2 space-x-3 rtl:space-x-reverse">
+            {/*<div className="absolute z-30 flex -translate-x-1/2 bottom-4 left-1/2 space-x-3 rtl:space-x-reverse">
               {mediaItems.map((_, index) => (
                 <button
                   key={index}
@@ -129,7 +129,7 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
                   onClick={() => goToSlide(index)}
                 />
               ))}
-            </div>
+            </div>*/}
 
             {/* Slider controls */}
             {mediaItems.length > 1 && (
@@ -166,7 +166,7 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
           open={isExpanded}
           onToggle={(e) => setIsExpanded(e.currentTarget.open)}
         >
-          <summary className="flex items-center justify-between bg-white md:px-20 px-2 md:my-5 my-2 h-[10vh] content-center cursor-pointer list-none">
+          <summary className="flex items-center justify-between bg-white md:px-20 px-2 md:my-5 my-2 h-[10vh] content-center cursor-pointer list-none gap-5">
             <div className="flex items-center md:gap-4 gap-1">
               {/* Expand Button with Plus Icon */}
               <Button
