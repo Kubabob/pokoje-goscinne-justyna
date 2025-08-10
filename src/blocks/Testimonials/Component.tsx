@@ -87,7 +87,7 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
             >
               {/* Carousel wrapper */}
               <div
-                className="relative overflow-hidden rounded-lg h-44 w-[75vw]"
+                className="relative overflow-visible rounded-lg h-44 w-[75vw]"
                 ref={carouselRef}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
@@ -101,7 +101,7 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
                     }`}
                     data-carousel-item
                   >
-                    <div className="bg-brand-white rounded-lg p-6 flex flex-col items-center">
+                    <div className="bg-brand-white rounded-lg flex flex-col items-center">
                       {testimonial.testimonial && (
                         <blockquote className="text-brand-blue mb-4 text-base text-left w-full max-w-prose">
                           <RichText data={testimonial.testimonial} className="mx-0 px-0" />
@@ -121,7 +121,7 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
               </div>
 
               {/* Slider indicators */}
-              <div className="relative z-30 flex gap-2">
+              <div className="relative z-30 flex gap-2 m-10">
                 {testimonials.map((_, index) => (
                   <button
                     key={index}

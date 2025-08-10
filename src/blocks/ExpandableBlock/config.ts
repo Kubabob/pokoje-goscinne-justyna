@@ -15,14 +15,20 @@ export const ExpandableBlock: Block = {
               type: 'checkbox',
             },
             {
-              name: 'mediaItems',
-              type: 'array',
+              label: 'Media items',
+              type: 'collapsible',
               fields: [
                 {
-                  name: 'media',
-                  type: 'upload',
-                  relationTo: 'media',
-                  required: true,
+                  name: 'mediaItems',
+                  type: 'array',
+                  fields: [
+                    {
+                      name: 'media',
+                      type: 'upload',
+                      relationTo: 'media',
+                      required: true,
+                    },
+                  ],
                 },
               ],
               admin: {
