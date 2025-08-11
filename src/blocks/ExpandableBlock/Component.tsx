@@ -166,7 +166,7 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
           open={isExpanded}
           onToggle={(e) => setIsExpanded(e.currentTarget.open)}
         >
-          <summary className="flex items-center justify-between bg-white md:px-20 px-2 md:my-5 my-2 h-[10vh] content-center cursor-pointer list-none gap-5">
+          <summary className="flex items-center justify-between bg-white md:px-20 px-2 md:my-5 my-2 h-[10vh] content-center cursor-pointer list-none gap-5 md:flex-row flex-col-reverse">
             <div className="flex items-center md:gap-4 gap-1">
               {/* Expand Button with Plus Icon */}
               <Button
