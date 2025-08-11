@@ -11,7 +11,7 @@ import { TextMediaBlock } from './TextMediaBlock/Component'
 import { TestimonialsBlock } from './Testimonials/Component'
 import { ExpandableBlock } from './ExpandableBlock/Component'
 import { MapBlock } from './MapBlock/Component'
-import { HeroBlock } from './HeroBlock/Component'
+// import { HeroBlock } from './HeroBlock/Component'
 // import { LinksBlock } from '@/blocks/LinksBlock/Component'
 
 const blockComponents = {
@@ -24,7 +24,7 @@ const blockComponents = {
   testimonials: TestimonialsBlock,
   expandableBlock: ExpandableBlock,
   mapBlock: MapBlock,
-  heroBlock: HeroBlock,
+  // heroBlock: HeroBlock,
 }
 
 export const RenderBlocks: React.FC<{

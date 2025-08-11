@@ -38,7 +38,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
   return (
     <div
       className={cn(
-        '',
+        'mx-auto',
         {
           container: enableGutter,
         },
@@ -47,7 +47,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
     >
       {(media || staticImage) && (
         <>
-          <div className="relative w-fit">
+          <div className="relative w-fit mx-auto">
             <Media
               imgClassName={cn('border border-border', imgClassName)}
               resource={media}
