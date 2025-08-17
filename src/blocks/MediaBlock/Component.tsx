@@ -47,9 +47,9 @@ export const MediaBlock: React.FC<Props> = (props) => {
     >
       {(media || staticImage) && (
         <>
-          <div className="relative w-fit mx-auto">
+          <div className="relative md:w-full mx-auto h-full">
             <Media
-              imgClassName={cn('border border-border', imgClassName)}
+              imgClassName={cn('border border-border w-full h-full object-cover', imgClassName)}
               resource={media}
               src={staticImage}
             />
