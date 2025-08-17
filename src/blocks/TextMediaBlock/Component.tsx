@@ -31,7 +31,7 @@ export const TextMediaBlock: React.FC<Props> = (props) => {
     media,
     captionClassName,
     className,
-    enableGutter = true,
+    enableGutter = false,
     imgClassName,
     staticImage,
     disableInnerContainer,
@@ -46,7 +46,7 @@ export const TextMediaBlock: React.FC<Props> = (props) => {
         {/* Media content div */}
         <div
           className={cn(
-            '',
+            // 'w-3/4 min-h-80',
             {
               container: enableGutter,
             },
@@ -56,7 +56,10 @@ export const TextMediaBlock: React.FC<Props> = (props) => {
         >
           {(media || staticImage) && (
             <Media
-              imgClassName={cn('border border-border', imgClassName)}
+              imgClassName={cn(
+                'md:w-4/5 md:min-h-80 object-cover border border-border',
+                imgClassName,
+              )}
               resource={media}
               src={staticImage}
             />
@@ -79,7 +82,7 @@ export const TextMediaBlock: React.FC<Props> = (props) => {
         {/* Text content div with vertical line */}
         <div
           className={cn(
-            'relative pl-8',
+            'relative md:pl-8',
             mediaPosition === 'right' ? 'lg:order-1' : 'lg:order-2',
             'content-center',
           )}
@@ -88,7 +91,7 @@ export const TextMediaBlock: React.FC<Props> = (props) => {
             <h2
               className={cn(
                 robotoSerif.className,
-                'text-brand-blue font-bold tracking-[0.02em] text-3xl mb-4',
+                'text-brand-blue font-bold tracking-[0.02em] text-3xl mb-4 text-left',
               )}
             >
               {head}
@@ -99,15 +102,15 @@ export const TextMediaBlock: React.FC<Props> = (props) => {
             {/* Vertical line */}
             <div className="absolute -left-10 top-0 bottom-0 w-[2px] bg-brand-blue hidden md:block"></div>
             {body && (
-              <div className="text-brand-blue mb-6">
-                <RichText data={body} className="px-0" />
+              <div className="text-brand-blue mb-6 text-left">
+                <RichText data={body} className="px-0 text-left" />
               </div>
             )}
 
             {enableButton && linkButton && (
               <CMSLink
                 {...linkButton}
-                className="btn mt-2 hover:opacity-90 transition-opacity text-brand-white"
+                className="btn mt-2 hover:opacity-90 transition-opacity text-brand-white text-left"
               ></CMSLink>
             )}
           </div>
