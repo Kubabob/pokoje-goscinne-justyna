@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  body {
+  h1 {
     @apply text-brand-blue;
   }
 }

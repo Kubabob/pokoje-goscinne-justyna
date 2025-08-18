@@ -86,11 +86,11 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
   }
 
   return (
-    <div className="w-[75vw] mx-auto border-brand-blue border-2 border-solid">
+    <div className="w-[75vw] mx-auto border-brand-blue border-2 border-solid rounded">
       <div className={`transition-all duration-500 ease-in-out`}>
         {/* Photo Slider */}
         {mediaItems && mediaItems.length > 0 && (
-          <div className="relative">
+          <div className="relative overflow-hidden">
             <div
               className="relative rounded-t-lg"
               ref={carouselRef}
@@ -105,11 +105,32 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
                     index === currentIndex ? 'opacity-100' : 'opacity-0 absolute inset-0'
                   } flex items-center justify-center`}
                 >
-                  <div className="flex items-center justify-center">
-                    <Media
-                      imgClassName={cn('md:h-[60vh] h-[30vh] object-cover', imgClassName)}
-                      resource={media}
-                    />
+                  {/* Background with parallax effect */}
+                  <div
+                    className="absolute inset-0 scale-110"
+                    style={{
+                      backgroundImage: media?.url ? `url(${media.url})` : 'none',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      filter: 'blur(15px) brightness(0.8)',
+                      transform: 'translateZ(-1px) scale(1.2)',
+                      zIndex: 0,
+                    }}
+                  />
+
+                  {/* Main image with brand-blue overlay */}
+                  <div className="flex items-center justify-center relative z-10">
+                    <div className="relative">
+                      <Media
+                        imgClassName={cn(
+                          'md:h-[60vh] h-[30vh] object-cover drop-shadow-2xl brightness-90',
+                          imgClassName,
+                        )}
+                        resource={media}
+                      />
+                      {/* Semi-transparent brand-blue overlay like in HighImpact hero */}
+                      <div className="absolute inset-0 bg-brand-blue/20 z-10" />
+                    </div>
                   </div>
                 </div>
               ))}
@@ -117,19 +138,19 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
 
             {/* Slider indicators */}
             {/*<div className="absolute z-30 flex -translate-x-1/2 bottom-4 left-1/2 space-x-3 rtl:space-x-reverse">
-              {mediaItems.map((_, index) => (
-                <button
-                  key={index}
-                  type="button"
-                  className={`w-3 h-3 rounded-full ${
-                    index === currentIndex ? 'bg-gray-400' : 'bg-gray-300'
-                  }`}
-                  aria-current={index === currentIndex ? 'true' : 'false'}
-                  aria-label={`Image ${index + 1}`}
-                  onClick={() => goToSlide(index)}
-                />
-              ))}
-            </div>*/}
+            {mediaItems.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                className={`w-3 h-3 rounded-full ${
+                  index === currentIndex ? 'bg-gray-400' : 'bg-gray-300'
+                }`}
+                aria-current={index === currentIndex ? 'true' : 'false'}
+                aria-label={`Image ${index + 1}`}
+                onClick={() => goToSlide(index)}
+              />
+            ))}
+          </div>*/}
 
             {/* Slider controls */}
             {mediaItems.length > 1 && (
@@ -197,7 +218,7 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
           <div className="bg-white md:px-20 px-2 mb-5 overflow-auto">
             {inside?.content && (
               <RichText
-                className="text-sm md:text-base gap-y-2 flex flex-col"
+                className="text-sm md:text-base gap-y-2 flex flex-col text-brand-blue"
                 data={inside?.content}
                 enableGutter={false}
                 enableProse={false} /* Disabled prose to remove default styling */
