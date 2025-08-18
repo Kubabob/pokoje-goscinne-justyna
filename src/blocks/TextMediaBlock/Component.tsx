@@ -55,14 +55,17 @@ export const TextMediaBlock: React.FC<Props> = (props) => {
           )}
         >
           {(media || staticImage) && (
-            <Media
-              imgClassName={cn(
-                'md:w-4/5 md:min-h-80 object-cover border border-border',
-                imgClassName,
-              )}
-              resource={media}
-              src={staticImage}
-            />
+            <div className="relative w-fit">
+              <Media
+                imgClassName={cn(
+                  'md:w-4/5 md:min-h-80 object-cover border border-border',
+                  imgClassName,
+                )}
+                resource={media}
+                src={staticImage}
+              />
+              <div className="absolute inset-0 md:right-[20%] bg-brand-blue/20" />
+            </div>
           )}
           {caption && (
             <div
@@ -102,8 +105,8 @@ export const TextMediaBlock: React.FC<Props> = (props) => {
             {/* Vertical line */}
             <div className="absolute -left-10 top-0 bottom-0 w-[2px] bg-brand-blue hidden md:block"></div>
             {body && (
-              <div className="text-brand-blue mb-6 text-left">
-                <RichText data={body} className="px-0 text-left" />
+              <div className="mb-6 text-left">
+                <RichText data={body} className="px-0 text-left text-brand-blue" />
               </div>
             )}
 

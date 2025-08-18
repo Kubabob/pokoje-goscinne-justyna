@@ -103,8 +103,11 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
                   >
                     <div className="bg-brand-white rounded-lg flex flex-col items-center">
                       {testimonial.testimonial && (
-                        <blockquote className="text-brand-blue mb-4 text-base text-left w-full max-w-prose">
-                          <RichText data={testimonial.testimonial} className="mx-0 px-0" />
+                        <blockquote className="mb-4 text-base text-left w-full max-w-prose">
+                          <RichText
+                            data={testimonial.testimonial}
+                            className="mx-0 px-0 text-brand-blue"
+                          />
                         </blockquote>
                       )}
 
@@ -149,7 +152,7 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
                   type="custom"
                   url="#"
                   appearance="default"
-                  className="flex items-center justify-center w-10 h-10 bg-brand-orange text-white hover:bg-brand-orange/90 focus:outline-none shadow-md"
+                  className="flex items-center justify-center w-10 h-10 bg-brand-orange text-brand-white hover:bg-brand-orange/90 focus:outline-none shadow-md"
                   label=""
                   onClick={(e) => {
                     e.preventDefault()
@@ -163,7 +166,7 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
                   type="custom"
                   url="#"
                   appearance="default"
-                  className="flex items-center justify-center w-10 h-10 bg-brand-orange text-white hover:bg-brand-orange/90 focus:outline-none shadow-md"
+                  className="flex items-center justify-center w-10 h-10 bg-brand-orange text-brand-white hover:bg-brand-orange/90 focus:outline-none shadow-md"
                   label=""
                   onClick={(e) => {
                     e.preventDefault()

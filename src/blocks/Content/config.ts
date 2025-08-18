@@ -56,6 +56,9 @@ const columnFields: Field[] = [
           BlocksFeature({ blocks: [MapBlock, Code] }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
+          TextColorFeature({
+            colors: ['#FFFFFF', '#14274A'],
+          }),
         ]
       },
     }),
