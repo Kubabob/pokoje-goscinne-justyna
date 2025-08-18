@@ -205,7 +205,7 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
 
             {/* Action Button */}
             {enableButton && buttonText && (
-              <Button variant="orange" className="md:py-7">
+              <Button variant="orange" className="md:py-7 pointer-events-none">
                 <RichText
                   data={buttonText}
                   className="font-semibold text-sm md:text-xl text-brand-white"
