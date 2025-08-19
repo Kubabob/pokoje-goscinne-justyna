@@ -63,10 +63,10 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
           {/* Links container - centered */}
           {Array.isArray(links) && links.length > 0 && (
             <div className="w-full flex justify-center mt-8">
-              <ul className="flex flex-col items-center gap-4 md:flex-row">
+              <ul className="flex flex-col items-center gap-4 md:flex-row list-none">
                 {links.map(({ link }, i) => {
                   return (
-                    <li key={i}>
+                    <li key={i} className="ml-0">
                       <CMSLink {...link} className="text-brand-white" />
                     </li>
                   )

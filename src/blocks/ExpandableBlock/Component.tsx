@@ -14,17 +14,7 @@ type Props = ExpandableBlockProps & {
 }
 
 export const ExpandableBlock: React.FC<Props> = (props) => {
-  const {
-    enableMedia,
-    mediaItems,
-    title,
-    enableButton,
-    buttonText,
-    inside,
-    staticImage,
-    imgClassName,
-    mediaSize,
-  } = props
+  const { mediaItems, title, enableButton, buttonText, inside, imgClassName } = props
 
   const [currentIndex, setCurrentIndex] = useState(0)
   const [touchStart, setTouchStart] = useState(0)
@@ -43,10 +33,6 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
   //   return () => clearInterval(interval)
   // }, [mediaItems])
 
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index)
-  }
-
   const goToPrevSlide = () => {
     if (!mediaItems) return
     setCurrentIndex((prevIndex) => (prevIndex - 1 + mediaItems.length) % mediaItems.length)
@@ -55,10 +41,6 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
   const goToNextSlide = () => {
     if (!mediaItems) return
     setCurrentIndex((prevIndex) => (prevIndex + 1) % mediaItems.length)
-  }
-
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded)
   }
 
   // Handle touch events for swiping
@@ -109,7 +91,8 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
                   <div
                     className="absolute inset-0 scale-110"
                     style={{
-                      backgroundImage: media?.url ? `url(${media.url})` : 'none',
+                      backgroundImage:
+                        typeof media !== 'number' && media?.url ? `url(${media.url})` : 'none',
                       backgroundSize: 'cover',
                       backgroundPosition: 'center',
                       filter: 'blur(15px) brightness(0.8)',
