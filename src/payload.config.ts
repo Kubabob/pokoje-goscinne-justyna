@@ -96,7 +96,7 @@ export default buildConfig({
     tasks: [],
   },
   i18n: {
-    supportedLanguages: { en, pl },
+    // supportedLanguages: { en, pl },
     fallbackLanguage: 'en',
   },
 })
