@@ -41,7 +41,7 @@ export const TextMediaBlock: React.FC<Props> = (props) => {
   if (media && typeof media === 'object') caption = media.caption
 
   return (
-    <div className="container my-16">
+    <div className="container my-16" data-umami-event="view-text-media-block">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-8 gap-x-16">
         {/* Media content div */}
         <div
@@ -55,7 +55,7 @@ export const TextMediaBlock: React.FC<Props> = (props) => {
           )}
         >
           {(media || staticImage) && (
-            <div className="relative w-fit">
+            <div className="relative w-fit" data-umami-event="view-media">
               <Media
                 imgClassName={cn(
                   'md:w-4/5 md:min-h-80 object-cover border border-border',
@@ -63,6 +63,7 @@ export const TextMediaBlock: React.FC<Props> = (props) => {
                 )}
                 resource={media}
                 src={staticImage}
+                data-umami-event="click-media"
               />
               <div className="absolute inset-0 md:right-[20%] bg-brand-blue/20" />
             </div>
@@ -76,6 +77,7 @@ export const TextMediaBlock: React.FC<Props> = (props) => {
                 },
                 captionClassName,
               )}
+              data-umami-event="view-caption"
             >
               <RichText data={caption} enableGutter={false} />
             </div>
@@ -89,6 +91,7 @@ export const TextMediaBlock: React.FC<Props> = (props) => {
             mediaPosition === 'right' ? 'lg:order-1' : 'lg:order-2',
             'content-center',
           )}
+          data-umami-event="view-text-content"
         >
           {head && (
             <h2
@@ -96,6 +99,7 @@ export const TextMediaBlock: React.FC<Props> = (props) => {
                 robotoSerif.className,
                 'text-brand-blue font-bold tracking-[0.02em] text-3xl mb-4 text-left',
               )}
+              data-umami-event="view-heading"
             >
               {head}
             </h2>
@@ -105,7 +109,7 @@ export const TextMediaBlock: React.FC<Props> = (props) => {
             {/* Vertical line */}
             <div className="absolute -left-10 top-0 bottom-0 w-[2px] bg-brand-blue hidden md:block"></div>
             {body && (
-              <div className="mb-6 text-left">
+              <div className="mb-6 text-left" data-umami-event="view-body-text">
                 <RichText data={body} className="px-0 text-left text-brand-blue" />
               </div>
             )}
@@ -114,6 +118,7 @@ export const TextMediaBlock: React.FC<Props> = (props) => {
               <CMSLink
                 {...linkButton}
                 className="btn mt-2 hover:opacity-90 transition-opacity text-brand-white text-left"
+                data-umami-event="click-cta-button"
               ></CMSLink>
             )}
           </div>

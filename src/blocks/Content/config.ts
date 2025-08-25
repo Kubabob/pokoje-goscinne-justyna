@@ -18,6 +18,7 @@ import {
 
 import { MapBlock } from '../MapBlock/config'
 import { Code } from '../Code/config'
+import { FormBlock } from '../Form/config'
 
 import { link } from '@/fields/link'
 
@@ -53,7 +54,7 @@ const columnFields: Field[] = [
         return [
           ...defaultFeatures,
           HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3'] }),
-          BlocksFeature({ blocks: [MapBlock, Code] }),
+          BlocksFeature({ blocks: [MapBlock, Code, FormBlock] }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
           TextColorFeature({

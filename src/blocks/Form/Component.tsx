@@ -7,6 +7,7 @@ import { useForm, FormProvider } from 'react-hook-form'
 import RichText from '@/components/RichText'
 import { Button } from '@/components/ui/button'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import nodemailer from 'nodemailer'
 
 import { fields } from './fields'
 import { getClientSideURL } from '@/utilities/getURL'
@@ -63,6 +64,7 @@ export const FormBlock: React.FC<
         }, 1000)
 
         try {
+          // Send to form submission API
           const req = await fetch(`${getClientSideURL()}/api/form-submissions`, {
             body: JSON.stringify({
               form: formID,
@@ -87,6 +89,38 @@ export const FormBlock: React.FC<
             })
 
             return
+          }
+
+          // Send email notification using nodemailer
+          try {
+            // Create HTML email body from form data
+            const emailHtml = `
+              <h2>New Form Submission</h2>
+              <p>Form ID: ${formID}</p>
+              <h3>Submission Data:</h3>
+              <ul>
+                ${dataToSend.map((item) => `<li><strong>${item.field}:</strong> ${item.value}</li>`).join('')}
+              </ul>
+            `
+
+            const emailReq = await fetch(`${getClientSideURL()}/api/send-email`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                subject: `New Form Submission: ${formID}`,
+                html: emailHtml,
+                text: `New Form Submission - Form ID: ${formID}`,
+              }),
+            })
+
+            const emailRes = await emailReq.json()
+            if (!emailReq.ok) {
+              console.warn('Email notification failed to send:', emailRes)
+            }
+          } catch (emailErr) {
+            console.warn('Error sending email notification:', emailErr)
           }
 
           setIsLoading(false)

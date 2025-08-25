@@ -3,8 +3,10 @@ import {
   HeadingFeature,
   FixedToolbarFeature,
   InlineToolbarFeature,
+  BlocksFeature,
 } from '@payloadcms/richtext-lexical'
 import type { Block } from 'payload'
+import { FormBlock } from '../Form/config'
 
 export const ExpandableBlock: Block = {
   slug: 'expandableBlock',
@@ -97,6 +99,7 @@ export const ExpandableBlock: Block = {
                     // HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
+                    BlocksFeature({ blocks: [FormBlock] }),
                   ]
                 },
               }),

@@ -18,10 +18,12 @@ import type {
   CallToActionBlock as CTABlockProps,
   MediaBlock as MediaBlockProps,
   MapBlock as MapBlockProps,
+  FormBlock as FormBlockProps,
 } from '@/payload-types'
 import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { MapBlock } from '@/blocks/MapBlock/Component'
+import { FormBlock } from '@/blocks/Form/Component'
 import { cn } from '@/utilities/ui'
 import {
   TypographyJSXConverters,
@@ -32,7 +34,12 @@ import { LinkHTMLConverter } from '@payloadcms/richtext-lexical/html'
 type NodeTypes =
   | DefaultNodeTypes
   | SerializedBlockNode<
-      CTABlockProps | MediaBlockProps | BannerBlockProps | CodeBlockProps | MapBlockProps
+      | CTABlockProps
+      | MediaBlockProps
+      | BannerBlockProps
+      | CodeBlockProps
+      | MapBlockProps
+      | FormBlockProps
     >
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
@@ -64,6 +71,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
     cta: ({ node }) => <CallToActionBlock {...node.fields} />,
     mapBlock: ({ node }) => <MapBlock {...node.fields} />,
+    formBlock: ({ node }) => <FormBlock {...(node.fields as any)} />,
   },
 })
 

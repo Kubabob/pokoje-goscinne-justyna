@@ -67,7 +67,10 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
   }
 
   return (
-    <div className="relative w-full py-12 bg-brand-white">
+    <div
+      className="relative w-full py-12 bg-brand-white"
+      data-umami-event="view-testimonials-section"
+    >
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <h2
@@ -84,6 +87,7 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
               className="relative flex flex-col content-center items-center"
               id="testimonials-carousel"
               data-carousel="slide"
+              data-umami-event="view-testimonials-carousel"
             >
               {/* Carousel wrapper */}
               <div
@@ -92,6 +96,7 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
+                data-umami-event="testimonials-touch-interaction"
               >
                 {testimonials.map((testimonial, index) => (
                   <div
@@ -100,6 +105,7 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
                       index === currentIndex ? 'opacity-100' : 'opacity-0 absolute inset-0'
                     }`}
                     data-carousel-item
+                    data-umami-event={`view-testimonial-${index + 1}`}
                   >
                     <div className="bg-brand-white rounded-lg flex flex-col items-center">
                       {testimonial.testimonial && (
@@ -136,6 +142,7 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
                     aria-label={`Testimonial ${index + 1}`}
                     onClick={() => goToSlide(index)}
                     data-carousel-slide-to={index}
+                    data-umami-event={`testimonial-indicator-click-${index + 1}`}
                   />
                 ))}
               </div>
@@ -158,6 +165,7 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
                     e.preventDefault()
                     goToPrevSlide()
                   }}
+                  data-umami-event="testimonial-prev-button-click"
                 >
                   <ChevronLeft size={26} strokeWidth={2.5} className="flex-shrink-0" />
                 </CMSLink>
@@ -172,6 +180,7 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = (props) => {
                     e.preventDefault()
                     goToNextSlide()
                   }}
+                  data-umami-event="testimonial-next-button-click"
                 >
                   <ChevronRight size={26} strokeWidth={2.5} className="flex-shrink-0" />
                 </CMSLink>
