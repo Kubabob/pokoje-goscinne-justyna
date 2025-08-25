@@ -60,7 +60,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
       {...(theme ? { 'data-theme': theme } : {})}
     >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
-        <Link href="/" className="flex-shrink-0 relative z-10">
+        <Link href="/" className="flex-shrink-0 relative z-10" data-umami-event="logo-click">
           <Logo theme={theme} loading="eager" priority="high" className="" />
         </Link>
 
@@ -77,6 +77,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
           )}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+          data-umami-event={mobileMenuOpen ? 'mobile-menu-close' : 'mobile-menu-open'}
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -87,6 +88,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
           onClose={() => setMobileMenuOpen(false)}
           data={data}
           theme={theme}
+          data-umami-event="mobile-menu-interaction"
         />
       </div>
     </header>

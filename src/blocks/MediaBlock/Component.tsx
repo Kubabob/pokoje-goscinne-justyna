@@ -44,6 +44,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
         },
         className,
       )}
+      data-umami-event="media-block-view"
     >
       {(media || staticImage) && (
         <>
@@ -52,10 +53,14 @@ export const MediaBlock: React.FC<Props> = (props) => {
               imgClassName={cn('border border-border w-full h-full object-cover', imgClassName)}
               resource={media}
               src={staticImage}
+              data-umami-event="media-interaction"
             />
             <div className="absolute inset-0 bg-brand-blue/30 mix-blend-multiply" />
             {customCaption && customCaptionType === 'onTop' && (
-              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-white backdrop-blur-sm p-4 w-1/2 h-20 flex items-center justify-center rounded-t-lg">
+              <div
+                className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-white backdrop-blur-sm p-4 w-1/2 h-20 flex items-center justify-center rounded-t-lg"
+                data-umami-event="media-caption-top-view"
+              >
                 <p className="font-semibold text-2xl text-center">{customCaption}</p>
               </div>
             )}
@@ -71,6 +76,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
             },
             captionClassName,
           )}
+          data-umami-event="media-caption-bottom-view"
         >
           {customCaption}
         </div>
@@ -84,6 +90,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
             },
             captionClassName,
           )}
+          data-umami-event="media-default-caption-view"
         >
           <RichText data={caption} enableGutter={false} />
         </div>

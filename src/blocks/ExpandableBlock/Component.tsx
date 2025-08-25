@@ -68,7 +68,10 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
   }
 
   return (
-    <div className="w-[75vw] mx-auto border-brand-blue border-2 border-solid rounded">
+    <div
+      className="w-[75vw] mx-auto border-brand-blue border-2 border-solid rounded"
+      data-umami-event="expandable-block-view"
+    >
       <div className={`transition-all duration-500 ease-in-out`}>
         {/* Photo Slider */}
         {mediaItems && mediaItems.length > 0 && (
@@ -79,6 +82,7 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
+              data-umami-event="expandable-block-carousel-interaction"
             >
               {mediaItems.map(({ media }, index) => (
                 <div
@@ -86,6 +90,7 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
                   className={`duration-700 ease-in-out transition-opacity ${
                     index === currentIndex ? 'opacity-100' : 'opacity-0 absolute inset-0'
                   } flex items-center justify-center`}
+                  data-umami-event={`expandable-block-image-view-${index}`}
                 >
                   {/* Background with parallax effect */}
                   <div
@@ -142,6 +147,7 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
                   type="button"
                   className="absolute top-1/2 -translate-y-1/2 left-2 z-30 flex items-center justify-center w-10 h-10 rounded-full bg-white/70 hover:bg-white focus:outline-none shadow-md"
                   onClick={goToPrevSlide}
+                  data-umami-event="expandable-block-prev-slide"
                 >
                   <ChevronLeft className="w-5 h-5" />
                   <span className="sr-only">Previous</span>
@@ -150,6 +156,7 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
                   type="button"
                   className="absolute top-1/2 -translate-y-1/2 right-2 z-30 flex items-center justify-center w-10 h-10 rounded-full bg-white/70 hover:bg-white focus:outline-none shadow-md"
                   onClick={goToNextSlide}
+                  data-umami-event="expandable-block-next-slide"
                 >
                   <ChevronRight className="w-5 h-5" />
                   <span className="sr-only">Next</span>
@@ -169,6 +176,7 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
           className="group"
           open={isExpanded}
           onToggle={(e) => setIsExpanded(e.currentTarget.open)}
+          data-umami-event="expandable-block-toggle"
         >
           <summary className="flex items-center justify-between bg-white md:px-20 px-2 md:my-5 my-2 h-[10vh] content-center cursor-pointer list-none gap-5 md:flex-row flex-col-reverse">
             <div className="flex items-center md:gap-4 gap-1">
@@ -177,6 +185,7 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
                 variant="orange"
                 size="icon"
                 className="transition-transform duration-300 pointer-events-none my-auto md:h-10 md:w-10 h-8 w-8 rounded-[50%]"
+                data-umami-event="expandable-block-button-icon"
               >
                 <Plus
                   className={`transform transition-transform group-open:rotate-45 rotate-0 text-brand-white md:h-6 md:w-6 h-4 w-4`}
@@ -188,7 +197,11 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
 
             {/* Action Button */}
             {enableButton && buttonText && (
-              <Button variant="orange" className="md:py-7 pointer-events-none">
+              <Button
+                variant="orange"
+                className="md:py-7 pointer-events-none"
+                data-umami-event="expandable-block-action-button"
+              >
                 <RichText
                   data={buttonText}
                   className="font-semibold text-sm md:text-xl text-brand-white"
@@ -198,7 +211,10 @@ export const ExpandableBlock: React.FC<Props> = (props) => {
           </summary>
 
           {/* Expandable Content */}
-          <div className="bg-white md:px-20 px-2 mb-5 overflow-auto">
+          <div
+            className="bg-white md:px-20 px-2 mb-5 overflow-auto"
+            data-umami-event="expandable-block-content-view"
+          >
             {inside?.content && (
               <RichText
                 className="text-sm md:text-base gap-y-2 flex flex-col text-brand-blue"

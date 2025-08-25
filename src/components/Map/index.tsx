@@ -32,6 +32,7 @@ export const OpenStreetMap: React.FC<OpenStreetMapType> = (props) => {
         center={[location[1], location[0]]}
         zoom={15}
         style={{ height: height, width: width }}
+        data-umami-event="map-view"
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -48,6 +49,7 @@ export const OpenStreetMap: React.FC<OpenStreetMapType> = (props) => {
             href={`https://www.openstreetmap.org/?mlat=${location[1]}&mlon=${location[0]}#map=17/${location[1]}/${location[0]}`}
             target="_blank"
             rel="noopener noreferrer"
+            data-umami-event="map-link-click"
           >
             {mapLinkText}
           </a>

@@ -53,6 +53,7 @@ export async function Footer() {
               <CMSLink
                 className={`text-brand-white text-xs pb-0.5 ${animatedLinkClass}`}
                 key={i}
+                data-umami-event={`footer-nav-mobile-${link.label || `item-${i}`}`}
                 {...link}
               />
             ))}
@@ -63,7 +64,7 @@ export async function Footer() {
         <div className="hidden md:grid md:grid-cols-3 md:items-center md:gap-8">
           {/* Logo - First column */}
           <div className="flex justify-start">
-            <Link href="/" className="inline-block">
+            <Link href="/" className="inline-block" data-umami-event="footer-logo-click">
               <Logo theme={'dark'} />
             </Link>
           </div>
@@ -89,6 +90,7 @@ export async function Footer() {
                     <CMSLink
                       className={`text-brand-white text-base pb-1 animatedUnderline`}
                       key={i}
+                      data-umami-event={`footer-nav-desktop-${link.label || `col${colIndex}-item${i}`}`}
                       {...link}
                     />
                   ))}
@@ -108,6 +110,7 @@ export async function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-brand-white hover:text-brand-white/80 transition-colors animatedUnderline"
+              data-umami-event="footer-developer-link"
             >
               Kuba Bożek
             </a>

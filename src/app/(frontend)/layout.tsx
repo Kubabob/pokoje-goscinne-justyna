@@ -7,6 +7,7 @@ import React from 'react'
 import { AdminBar } from '@/components/AdminBar'
 import { Footer } from '@/Footer/Component'
 import { Header } from '@/Header/Component'
+// import UmamiConsent from '@/components/GDPRConsent/Umami'
 import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
@@ -33,6 +34,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
         <Script
+          async
           defer
           src="http://135.125.106.137:2345/script.js"
           data-website-id="5b02b132-7d68-4069-941c-ddc27fd5ec61"
@@ -48,6 +50,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
           <Header />
           {children}
+          {/*<UmamiConsent />*/}
           <Footer />
         </Providers>
       </body>
