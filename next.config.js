@@ -36,6 +36,15 @@ const nextConfig = {
       },
     ]
   },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        fs: false,
+        tls: false,
+      }
+    }
+    return config
+  },
 }
 
 export default withPayload(nextConfig, { devBundleServerPackages: false })

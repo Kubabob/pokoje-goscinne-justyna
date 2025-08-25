@@ -14,6 +14,7 @@ import { draftMode } from 'next/headers'
 
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
+import Script from 'next/script'
 
 const montserrat = Montserrat({ style: ['normal'], subsets: ['latin'] })
 
@@ -31,6 +32,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
+        <Script
+          defer
+          src="http://135.125.106.137:2345/script.js"
+          data-website-id="5b02b132-7d68-4069-941c-ddc27fd5ec61"
+        ></Script>
       </head>
       <body className="flex flex-col min-h-screen">
         <Providers>
