@@ -57,7 +57,9 @@ export const plugins: Plugin[] = [
   }),
   formBuilderPlugin({
     fields: {
-      payment: false,
+      payment: true,
+      date: true,
+      // number: false,
     },
     formOverrides: {
       fields: ({ defaultFields }) => {
