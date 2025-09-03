@@ -3,7 +3,7 @@ module.exports = {
 		{
 			name: "pokoje-justyna.pl",
 			script: "node_modules/next/dist/bin/next",
-			args: "dev -p 49153",
+			args: "dev",
 			watch: false,
 		},
 	],
