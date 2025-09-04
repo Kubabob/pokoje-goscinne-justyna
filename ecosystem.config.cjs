@@ -1,9 +1,8 @@
 module.exports = {
   apps: [
     {
-      name: 'nextjs-app',
-      script: 'pnpm',
-      args: 'start',
+      name: 'pokoje-justyna.pl',
+      script: 'pnpm run',
 
       // Process management
       instances: 2, // Number of instances (or 'max' for all CPUs)
@@ -17,16 +16,13 @@ module.exports = {
         NODE_ENV: 'production',
         PORT: 3000,
         HOST: '0.0.0.0',
-      },
-
-      // Environment-specific configurations
-      env_production: {
-        NODE_ENV: 'production',
-        PORT: 3000,
+        args: 'dev:prod',
       },
       env_development: {
         NODE_ENV: 'development',
         PORT: 3000,
+        HOST: '0.0.0.0',
+        args: 'dev',
       },
 
       // Logging
