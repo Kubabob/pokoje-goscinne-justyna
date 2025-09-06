@@ -101,6 +101,7 @@ export const FormBlock: React.FC<
               <ul>
                 ${dataToSend.map((item) => `<li><strong>${item.field}:</strong> ${item.field === 'email' ? `<a href=mailto:${item.value}>${item.value}</a>` : item.value}</li>`)}
               </ul>
+              <p>${props.blockName}</p>
             `
 
             const emailReq = await fetch(`${getClientSideURL()}/api/send-email`, {
@@ -185,7 +186,7 @@ export const FormBlock: React.FC<
                   })}
               </div>
 
-              <Button form={formID} type="submit" variant="default">
+              <Button form={formID} type="submit" variant="orange">
                 {submitButtonLabel}
               </Button>
             </form>
