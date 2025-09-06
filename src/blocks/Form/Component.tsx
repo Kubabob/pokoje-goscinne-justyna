@@ -96,9 +96,8 @@ export const FormBlock: React.FC<
           try {
             // Create HTML email body from form data
             const emailHtml = `
-              <h2>New Form Submission</h2>
-              <p>Form ID: ${formID}</p>
-              <h3>Submission Data:</h3>
+              <h2>Zapytanie ofertowe</h2>
+              <p>Numer ${formID}</p>
               <ul>
                 ${dataToSend.map((item) => `<li><strong>${item.field}:</strong> ${item.field === 'email' ? `<a href=mailto:${item.value}>${item.value}</a>` : item.value}</li>`)}
               </ul>
@@ -110,9 +109,9 @@ export const FormBlock: React.FC<
                 'Content-Type': 'application/json',
               },
               body: JSON.stringify({
-                subject: `New Form Submission: ${formID}`,
+                subject: `Zapytanie ze strony numer ${formID}`,
                 html: emailHtml,
-                text: `New Form Submission - Form ID: ${formID}`,
+                text: `Zapytanie ze strony numer ${formID}`,
               }),
             })
 
@@ -138,7 +137,7 @@ export const FormBlock: React.FC<
           console.warn(err)
           setIsLoading(false)
           setError({
-            message: 'Something went wrong.',
+            message: 'Wystąpił nieoczekiwany błąd.',
           })
         }
       }
@@ -158,7 +157,7 @@ export const FormBlock: React.FC<
           {!isLoading && hasSubmitted && confirmationType === 'message' && (
             <RichText data={confirmationMessage} />
           )}
-          {isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
+          {isLoading && !hasSubmitted && <p>Wysyłanie, proszę czekać</p>}
           {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
           {!hasSubmitted && (
             <form id={formID} onSubmit={handleSubmit(onSubmit)}>
