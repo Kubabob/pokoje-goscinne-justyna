@@ -11,6 +11,7 @@ import nodemailer from 'nodemailer'
 
 import { fields } from './fields'
 import { getClientSideURL } from '@/utilities/getURL'
+import { it } from 'node:test'
 
 export type FormBlockType = {
   blockName?: string
@@ -99,7 +100,7 @@ export const FormBlock: React.FC<
               <p>Form ID: ${formID}</p>
               <h3>Submission Data:</h3>
               <ul>
-                ${dataToSend.map((item) => `<li><strong>${item.field}:</strong> ${item.value}</li>`).join('')}
+                ${dataToSend.map((item) => `<li><strong>${item.field}:</strong> ${item.field === 'email' ? `<a href=mailto:${item.value}>${item.value}</a>` : item.value}</li>`)}
               </ul>
             `
 
