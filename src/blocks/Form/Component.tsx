@@ -96,12 +96,10 @@ export const FormBlock: React.FC<
           try {
             // Create HTML email body from form data
             const emailHtml = `
-              <h2>Zapytanie ofertowe</h2>
-              <p>Numer ${formID}</p>
+              <h2>Zapytanie ofertowe numer ${formID} - ${props.blockName}</h2>
               <ul>
                 ${dataToSend.map((item) => `<li><strong>${item.field}:</strong> ${item.field === 'email' ? `<a href=mailto:${item.value}>${item.value}</a>` : item.value}</li>`)}
               </ul>
-              <p>${props.blockName}</p>
             `
 
             const emailReq = await fetch(`${getClientSideURL()}/api/send-email`, {
