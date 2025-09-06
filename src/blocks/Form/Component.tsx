@@ -98,7 +98,7 @@ export const FormBlock: React.FC<
             const emailHtml = `
               <h2>Zapytanie ofertowe numer ${formID} - ${props.blockName}</h2>
               <ul>
-                ${dataToSend.map((item) => `<li><strong>${item.field}:</strong> ${item.field === 'email' ? `<a href=mailto:${item.value}?subject=Zapytanie&20ofertowe&20|&20Pokoje&20gościnne&20Justyna>${item.value}</a>` : item.value}</li>`)}
+                ${dataToSend.map((item) => `<li><strong>${item.field}:</strong> ${item.field === 'email' ? `<a href=mailto:${item.value}?subject=Zapytanie%20ofertowe%20|%20Pokoje%20gościnne%20Justyna>${item.value}</a>` : item.value}</li>`)}
               </ul>
             `
 
