@@ -5,68 +5,75 @@
 @import 'react-day-picker/dist/style.css';
 
 @layer base {
-  /*h1 {
+    /*h1 {
     @apply text-brand-blue;
   }*/
-  ul {
-    list-style: disc;
-  }
+    ul {
+        list-style: disc;
+    }
 
-  li {
-    margin-left: 2rem;
-  }
+    li {
+        margin-left: 2rem;
+    }
 }
 
 /* Animated underline for telephone and email links */
 @layer components {
-  a[href^='tel:'],
-  a[href^='mailto:'] {
-    @apply relative text-inherit;
-    @apply after:absolute after:bg-current after:bottom-0 after:left-0 after:h-[1px] after:w-0;
-    @apply after:transition-all after:duration-300 hover:after:w-full;
-  }
+    a[href^='tel:'],
+    a[href^='mailto:'] {
+        @apply relative text-inherit;
+        @apply after:absolute after:bg-current after:bottom-0 after:left-0 after:h-[1px] after:w-0;
+        @apply after:transition-all after:duration-300 hover:after:w-full;
+    }
 
-  a {
-    @apply no-underline text-inherit;
-    text-decoration: none !important;
-  }
+    a {
+        @apply no-underline text-inherit;
+        text-decoration: none !important;
+    }
 
-  .animatedUnderline {
-    @apply relative text-inherit;
-    @apply after:absolute after:bg-current after:bottom-0 after:left-0 after:h-[1px] after:w-0;
-    @apply after:transition-all after:duration-300 hover:after:w-full;
-  }
+    .animatedUnderline {
+        @apply relative text-inherit;
+        @apply after:absolute after:bg-current after:bottom-0 after:left-0 after:h-[1px] after:w-0;
+        @apply after:transition-all after:duration-300 hover:after:w-full;
+    }
 }
 
 @keyframes glowPulse {
-  0% {
-    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5))
-      drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
-  }
-  50% {
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8))
-      drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
-  }
-  100% {
-    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5))
-      drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
-  }
+    0% {
+        filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5))
+            drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+    }
+    50% {
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8))
+            drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    }
+    100% {
+        filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5))
+            drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+    }
 }
 
 @keyframes opacityPulse {
-  0% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.5;
-  }
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
 }
 
 .arrow-animation {
-  animation:
-    glowPulse 4s infinite ease-in-out,
-    opacityPulse 4s infinite ease-in-out;
+    animation:
+        glowPulse 4s infinite ease-in-out,
+        opacityPulse 4s infinite ease-in-out;
+}
+
+.html {
+    --brand-blue: '#14274A';
+    --brand-white: '#FFFFFF';
+    --brand-orange: '#E0B973';
+    --brand-orange-dark: '#D6A347';
 }

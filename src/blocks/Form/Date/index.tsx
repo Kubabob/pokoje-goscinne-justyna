@@ -77,6 +77,7 @@ export const DatePicker: React.FC<
                             <PopoverContent className="w-auto p-0 bg-background" align="start">
                                 <Calendar
                                     required
+                                    className="bg-brand-white"
                                     captionLayout="dropdown"
                                     mode="range"
                                     selected={date}
