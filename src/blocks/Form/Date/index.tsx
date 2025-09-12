@@ -34,7 +34,10 @@ export const DatePicker: React.FC<
     })
     return (
         <Width width={width}>
-            <Label htmlFor={name}>{label}</Label>
+            <Label htmlFor={name}>
+                {label}
+                {required && <span className="ml-1 text-red-500">*</span>}
+            </Label>
             <Controller
                 control={control}
                 name={name}
