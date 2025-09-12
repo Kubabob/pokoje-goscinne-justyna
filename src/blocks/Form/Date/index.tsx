@@ -49,6 +49,8 @@ export const DatePicker: React.FC<
                                     variant={'outline'}
                                     className={cn(
                                         'w-full pl-3 text-left font-normal',
+                                        // mobile-first: allow automatic height, padding and multiline text
+                                        'h-auto py-2 leading-tight whitespace-pre-line break-words items-start',
                                         !value && 'text-muted-foreground',
                                     )}
                                 >
@@ -57,9 +59,25 @@ export const DatePicker: React.FC<
                                             format(new Date(value), 'PPP', { locale: pl })
                                         ) : (value as any).from ? (
                                             (value as any).to ? (
-                                                `${format((value as any).from as Date, 'PPP', {
-                                                    locale: pl,
-                                                })} — ${format((value as any).to as Date, 'PPP', { locale: pl })}`
+                                                // Desktop: inline range. Mobile: stacked with a blank line between dates.
+                                                <>
+                                                    <span className="hidden md:block">
+                                                        {`${format((value as any).from as Date, 'PPP', { locale: pl })} — ${format((value as any).to as Date, 'PPP', { locale: pl })}`}
+                                                    </span>
+                                                    <span className="block md:hidden">
+                                                        {format(
+                                                            (value as any).from as Date,
+                                                            'PPP',
+                                                            { locale: pl },
+                                                        )}
+                                                        <br />
+                                                        -
+                                                        <br />
+                                                        {format((value as any).to as Date, 'PPP', {
+                                                            locale: pl,
+                                                        })}
+                                                    </span>
+                                                </>
                                             ) : (
                                                 format((value as any).from as Date, 'PPP', {
                                                     locale: pl,
@@ -71,7 +89,7 @@ export const DatePicker: React.FC<
                                     ) : (
                                         <span>Wybierz termin</span>
                                     )}
-                                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50 self-start md:self-center" />
                                 </Button>
                             </PopoverTrigger>
                             <PopoverContent className="w-auto p-0 bg-background" align="start">
