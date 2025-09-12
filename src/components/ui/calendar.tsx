@@ -97,11 +97,7 @@ function Calendar({
                 range_middle: cn('rounded-none', defaultClassNames.range_middle),
                 range_end: cn('bg-accent rounded-r-md', defaultClassNames.range_end),
                 // show accent background + circular brand-blue border for today when not selected
-                today: cn(
-                    'bg-brand-orange text-accent-foreground border-2 border-brand-blue data-[selected=true]:rounded-none data-[selected=true]:bg-brand-orange data-[selected=true]:border-none',
-                    // 'bg-accent text-accent-foreground rounded-full border-2 border-brand-blue data-[selected=true]:border-none',
-                    defaultClassNames.today,
-                ),
+                today: cn('bg-brand-orange text-accent-foreground', defaultClassNames.today),
                 outside: cn(
                     'text-muted-foreground aria-selected:text-muted-foreground',
                     defaultClassNames.outside,
