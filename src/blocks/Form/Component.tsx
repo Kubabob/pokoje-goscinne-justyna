@@ -7,12 +7,11 @@ import { useForm, FormProvider } from 'react-hook-form'
 import RichText from '@/components/RichText'
 import { Button } from '@/components/ui/button'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
-import nodemailer from 'nodemailer'
 import { format } from 'date-fns'
+import { pl } from 'date-fns/locale'
 
 import { fields } from './fields'
 import { getClientSideURL } from '@/utilities/getURL'
-import { it } from 'node:test'
 
 export type FormBlockType = {
     blockName?: string
@@ -51,13 +50,41 @@ export const FormBlock: React.FC<
     } = formMethods
 
     const [isLoading, setIsLoading] = useState(false)
-    const [hasSubmitted, setHasSubmitted] = useState<boolean>()
+    const [hasSubmitted, setHasSubmitted] = useState(false)
     const [error, setError] = useState<{ message: string; status?: string } | undefined>()
     const router = useRouter()
 
+    // Client-side stable stringify to compute deterministic fingerprint
+    const stableStringify = (value: any): string => {
+        if (value === null || typeof value !== 'object') return JSON.stringify(value)
+        if (Array.isArray(value)) return '[' + value.map(stableStringify).join(',') + ']'
+        const keys = Object.keys(value).sort()
+        return (
+            '{' +
+            keys.map((k) => JSON.stringify(k) + ':' + stableStringify(value[k])).join(',') +
+            '}'
+        )
+    }
+
+    const makeFingerprint = async (payload: unknown): Promise<string> => {
+        try {
+            const normalized = stableStringify(payload)
+            const enc = new TextEncoder().encode(normalized)
+            const hashBuffer = await crypto.subtle.digest('SHA-256', enc)
+            const hashArray = Array.from(new Uint8Array(hashBuffer))
+            return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
+        } catch (e) {
+            // fallback to a simple base64 of JSON if subtle fails
+            return btoa(unescape(encodeURIComponent(JSON.stringify(payload))))
+        }
+    }
+
     const onSubmit = useCallback(
         (data: FormFieldBlock[]) => {
-            let loadingTimerID: ReturnType<typeof setTimeout>
+            if (isLoading) return
+            setError(undefined)
+            setIsLoading(true)
+
             const submitForm = async () => {
                 setError(undefined)
 
@@ -66,10 +93,29 @@ export const FormBlock: React.FC<
                     value,
                 }))
 
-                // delay loading indicator by 1s
-                loadingTimerID = setTimeout(() => {
-                    setIsLoading(true)
-                }, 500)
+                // Client-side duplicate check using fingerprint + localStorage
+                try {
+                    const fp = await makeFingerprint({ formID, submission: dataToSend })
+                    const key = `form-fp:${formID}:${fp}`
+                    const existing =
+                        typeof window !== 'undefined' ? window.localStorage.getItem(key) : null
+                    const WINDOW_MS = 1000 * 60 * 2 // 2 minutes
+                    if (existing) {
+                        const ts = Number(existing)
+                        if (!Number.isNaN(ts) && Date.now() - ts < WINDOW_MS) {
+                            setIsLoading(false)
+                            setError({
+                                message:
+                                    'Ta wiadomość została już wysłana. Proszę spróbować później.',
+                            })
+                            return
+                        }
+                    }
+                    if (typeof window !== 'undefined')
+                        window.localStorage.setItem(key, String(Date.now()))
+                } catch (e) {
+                    // fingerprinting failed; continue with submission
+                }
 
                 try {
                     // Send to form submission API
@@ -86,8 +132,6 @@ export const FormBlock: React.FC<
 
                     const res = await req.json()
 
-                    clearTimeout(loadingTimerID)
-
                     if (req.status >= 400) {
                         setIsLoading(false)
 
@@ -99,20 +143,21 @@ export const FormBlock: React.FC<
                         return
                     }
 
-                    // Send email notification using nodemailer
+                    // Send email notification
                     try {
-                        // Create HTML email body from form data
                         const formatSubmissionValue = (value: any) => {
                             if (value == null) return ''
                             if (typeof value === 'string') return value
                             if (Array.isArray(value)) return value.join(', ')
-                            if (value instanceof Date) return format(value, 'PPP')
+                            if (value instanceof Date) return format(value, 'PPP', { locale: pl })
                             if (typeof value === 'object') {
                                 if ('from' in value) {
                                     const from = value.from
-                                        ? format(new Date(value.from), 'PPP')
+                                        ? format(new Date(value.from), 'PPP', { locale: pl })
                                         : ''
-                                    const to = value.to ? format(new Date(value.to), 'PPP') : ''
+                                    const to = value.to
+                                        ? format(new Date(value.to), 'PPP', { locale: pl })
+                                        : ''
                                     return to ? `${from} — ${to}` : from
                                 }
                                 if ('value' in value) return String(value.value)
@@ -141,9 +186,9 @@ export const FormBlock: React.FC<
                                 'Content-Type': 'application/json',
                             },
                             body: JSON.stringify({
-                                subject: `Zapytanie ze strony numer ${formID}`,
+                                subject: `Zapytanie ze strony`,
                                 html: emailHtml,
-                                text: `Zapytanie ze strony numer ${formID}`,
+                                text: `Zapytanie ze strony`,
                             }),
                         })
 
@@ -176,7 +221,7 @@ export const FormBlock: React.FC<
 
             void submitForm()
         },
-        [router, formID, redirect, confirmationType],
+        [router, formID, redirect, confirmationType, isLoading],
     )
 
     return (
@@ -220,7 +265,7 @@ export const FormBlock: React.FC<
 
                             <Button
                                 form={formID}
-                                disabled={hasSubmitted}
+                                disabled={hasSubmitted || isLoading}
                                 type="submit"
                                 variant="orange"
                             >
