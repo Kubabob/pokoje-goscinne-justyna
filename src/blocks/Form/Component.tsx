@@ -69,7 +69,7 @@ export const FormBlock: React.FC<
                 // delay loading indicator by 1s
                 loadingTimerID = setTimeout(() => {
                     setIsLoading(true)
-                }, 1000)
+                }, 500)
 
                 try {
                     // Send to form submission API
@@ -218,7 +218,12 @@ export const FormBlock: React.FC<
                                     })}
                             </div>
 
-                            <Button form={formID} type="submit" variant="orange">
+                            <Button
+                                form={formID}
+                                disabled={hasSubmitted}
+                                type="submit"
+                                variant="orange"
+                            >
                                 {submitButtonLabel}
                             </Button>
                         </form>
