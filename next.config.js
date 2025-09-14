@@ -13,9 +13,9 @@ const nextConfig = {
             {
                 protocol: 'https',
                 hostname: 'pokoje-justyna.pl',
-                pathname: 'api/media/**',
+                pathname: '/api/media/**',
             },
-            ...[NEXT_PUBLIC_SERVER_URL /* 'https://example.com' */].map((item) => {
+            ...[NEXT_PUBLIC_SERVER_URL].filter(Boolean).map((item) => {
                 const url = new URL(item)
 
                 return {
