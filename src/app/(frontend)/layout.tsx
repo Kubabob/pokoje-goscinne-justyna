@@ -35,11 +35,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <meta name="msapplication-TileColor" content="#da532c" />
                 <meta name="theme-color" content="#ffffff" />
                 <Script
-                    async
                     defer
-                    src="http://135.125.106.137:2345/script.js"
-                    data-website-id="5b02b132-7d68-4069-941c-ddc27fd5ec61"
-                ></Script>
+                    src="https://umami.pokoje-justyna.pl/script.js"
+                    data-website-id="806f7ed8-2a37-474e-96b4-3b2067ab181f"
+                />
             </head>
             <body className="flex flex-col min-h-screen">
                 <Providers>
