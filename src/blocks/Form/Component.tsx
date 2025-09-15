@@ -2,7 +2,7 @@
 import type { FormFieldBlock, Form as FormType } from '@payloadcms/plugin-form-builder/types'
 
 import { useRouter } from 'next/navigation'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, useId } from 'react'
 import { useForm, FormProvider } from 'react-hook-form'
 import RichText from '@/components/RichText'
 import { Button } from '@/components/ui/button'
@@ -38,6 +38,8 @@ export const FormBlock: React.FC<
         } = {},
         introContent,
     } = props
+    const instanceId = useId()
+    const formElementId = props.id ?? formID ?? `form-${instanceId}`
 
     const formMethods = useForm({
         defaultValues: formFromProps.fields,
@@ -237,7 +239,7 @@ export const FormBlock: React.FC<
                     {isLoading && !hasSubmitted && <p>Wysyłanie, proszę czekać</p>}
                     {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
                     {!hasSubmitted && (
-                        <form id={formID} onSubmit={handleSubmit(onSubmit)}>
+                        <form id={formElementId} onSubmit={handleSubmit(onSubmit)}>
                             <div className="mb-4 last:mb-0">
                                 {formFromProps &&
                                     formFromProps.fields &&
@@ -264,7 +266,6 @@ export const FormBlock: React.FC<
                             </div>
 
                             <Button
-                                form={formID}
                                 disabled={hasSubmitted || isLoading}
                                 type="submit"
                                 variant="orange"
