@@ -31,7 +31,7 @@ export const GoUpButton: React.FC = () => {
         //     Go Up
         // </p>
         <div
-            className="fixed right-4 bottom-10 transform -translate-x-1/2 cursor-pointer z-20"
+            className="fixed right-0 bottom-4 md:right-4 md:bottom-10 transform -translate-x-1/2 cursor-pointer z-20"
             onClick={scrollToTop}
             hidden={!isVisible}
         >
