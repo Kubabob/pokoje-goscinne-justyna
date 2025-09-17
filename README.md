@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Next.js](https://img.shields.io/badge/Next.js-13-black?logo=nextdotjs)](https://nextjs.org)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=nextdotjs)](https://nextjs.org)
 [![Payload CMS](https://img.shields.io/badge/Payload-CMS-313131?logo=payloadcms)](https://payloadcms.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-%23336791.svg?logo=postgresql&logoColor=white)](https://www.postgresql.org)
@@ -10,7 +10,7 @@
 
 </div>
 
-A modern, high-performance website for Pokoje Gościnne Justyna built with Next.js 13 and Payload CMS as a headless content management system.
+A modern, high-performance website for Pokoje Gościnne Justyna built with Next.js 15 and Payload CMS as a headless content management system.
 
 ## 📷 Screenshots
 
